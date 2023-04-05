@@ -1,0 +1,1253 @@
+syn = syn
+queue_on_teleport = queue_on_teleport
+fluxus = fluxus
+iskrnlclosure = iskrnlclosure
+
+local isactor = (syn and isactor)
+local getactors = (syn and getactors)
+
+local Player = game:GetService("Players").LocalPlayer
+local TeleportService = game:GetService("TeleportService")
+local queue_on_teleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+
+if not syn or not getactors then
+    if not queue_on_teleport or iskrnlclosure ~= nil then
+        return Player:Kick('[mØpsHub - Error]: executor not supported, sorry!')
+    end
+    if not syn then
+        return Player:Kick('[mØpsHub - Error]: manual bypass currently broken. use synapse to use this script')
+    end
+    Player.OnTeleport:Connect(function(state)
+        if state == Enum.TeleportState.InProgress then
+            queue_on_teleport("loadstring([[" .. [[
+                local placeId = game.PlaceId;
+                if placeId ~= 5938036553 then
+                    return;
+                end
+
+                -- variables
+                local runService = game:GetService("RunService");
+                local replicatedFirst = game:GetService("ReplicatedFirst");
+
+                -- actor bypass
+                repeat task.wait() until game.Players.LocalPlayer
+                game.DescendantAdded:Connect(function(instance)
+                    if instance:IsA("Actor") and instance:IsDescendantOf(game.Players.LocalPlayer) then
+                        game.Players.LocalPlayer.PlayerScripts.ChildAdded:Wait();
+                        for _, child in next, instance:GetChildren() do
+                            child.Parent = game.Players.LocalPlayer.PlayerScripts;
+                        end
+                    end
+                end);
+
+                -- connect parallel bypass
+                local old;
+                old = hookmetamethod(runService.Stepped, "__index", function(self, index)
+                    local indexed = old(self, index);
+                    if index == "ConnectParallel" and not checkcaller() then
+                        hookfunction(indexed, newcclosure(function(signal, callback)
+                            return old(self, "Connect")(signal, function()
+                                return self:Wait() and callback();
+                            end);
+                        end));
+                    end
+                    return indexed;
+                end);
+
+                printconsole = printconsole or print
+                local _startTick = tick()
+                printconsole("[mØpsHub]: Framework loading...")
+                task.wait(10)
+                repeat task.wait() until getrenv()._G.globals
+                getactors=getactors getgenv=getgenv getrenv=getrenv syn=syn setreadonly=setreadonly hookmetamethod=hookmetamethod checkcaller=checkcaller writeclipboard=writeclipboard identifyexecutor=identifyexecutor rconsoleprint=rconsoleprint rconsoleclear=rconsoleclear rconsoleerr=rconsoleerr rconsoleinfo=rconsoleinfo rconsolename=rconsolename rconsolewarn=rconsolewarn hookfunction=hookfunction printconsole=printconsole getgc=getgc Drawing=Drawing mousemoverel=mousemoverel getrawmetatable=getrawmetatable islclosure=islclosure getupvalues=getupvalues setupvalue=setupvalue getinfo=getinfo is_synapse_function=is_synapse_function iskrnlclosure=iskrnlclosure isourclosure=isourclosure queue_on_teleport=queue_on_teleport fluxus=fluxus isactor=isactor isfile=isfile writefile=writefile readfile=readfile if writeclipboard then writeclipboard("discord.gg/g4EGAwjUAK")end repeat task.wait()until game:IsLoaded() local _=loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/Dynissimo/main/Scripts/AkaliNotif.lua"))() _=_.Notify local c="1.0.4" local j=game:GetService("Players") local p=j.LocalPlayer local _=p:GetMouse() local h=game:GetService("RunService") local _=game:GetService("TweenService") local m=game:GetService("UserInputService") local d=game:GetService("CoreGui") local o=game:GetService("Workspace").CurrentCamera local _=game:GetService("Debris") local k=game:GetService("HttpService") local a=game:GetService("RbxAnalyticsService") local _=string.format("mopshub_%s",game.PlaceId) local f,b=identifyexecutor() local i=string.format("mopsHub - %s - %s","FRONTLINES",f) local l="/mopsHub/settings_frontlines_premium.mhs" local a=a:GetClientId() local g=(syn and is_synapse_function)or iskrnlclosure or isourclosure local r={Settings={_DEBUG=false},Aim_Assist={Enabled=false,VisibleCheck=false,Target_Hitbox="Head",Smoothness=8,showFOV=false,fov=180,fovColor=Color3.fromRGB(0,255,0)},Silent_Aim={Enabled=false,VisibleCheck=false,Target_Hitbox="Head",HitChance=0.5,HeadChance=0.5,Randomization=0.5,showFOV=false,fov=180,TriggerBot=false,fovColor=Color3.fromRGB(0,255,0)},ESP={Enabled=false,Boxes=false,Tracers=false,TracerAttachShift=1,tracersOrientation="Bottom",Health=false,HealthBar=false,Names=false,Distance=false,Weapon=false,Chams=false,FontSize=13,BoxColor=Color3.fromRGB(255,255,255),ChamsOutlineColor=Color3.fromRGB(255,255,255),ChamsFillColor=Color3.fromRGB(255,0,0),ChamsFillTransparency=0.5,ChamsOutlineTransparency=0.5,TextColor=Color3.fromRGB(255,255,255),TracerColor=Color3.fromRGB(255,255,255),TextSize=8,Rainbow=false,SavedColors={},Highlight_Target=false,Chams_Visible_Check=false},Character_Modifications={WalkSpeedMultiplier={Multiplier=1},InfiniteJump={Enabled=false,JumpHeight=55},Bunny_Hop={Enabled=false,Power=4},No_Fall_Damage={Enabled=false}},Gun_Mods={NoRecoil=false,NoSpread=false,RapidFire=false},Hitbox_Extender={Enabled=false,Size=3,Hitbox_Transparency=0.5},KillAll=false,Functions={},Connections={},uiElements={},Client={globals=nil,enums=nil,utils=nil,event_enum=nil,global_sol_state=nil,fpv_sol_recoil=nil,fpv_sol_spread=nil,fpv_sol_equipment=nil,fpv_sol_multipliers=nil,fpv_sol_instances=nil,soldier_models=nil,soldiers_alive=nil,sol_state_class=nil,sol_firearm_operation=nil,sol_time_sequence_value=nil,exe_set_t=nil,exe_set=nil},Misc={FOV_Circles={},Silent_Aim_Target=nil,hitboxExtenderEnabledOnce=false,Hitbox_Parts={["Head"]="TPVBodyVanillaHead",["Torso"]="HumanoidRootPart"},Aim_Assist_Active=false,fire_rates={},killall_target=nil}} getgenv()._WINDOW={Tabs={}} local n={Tabs={"Weapon","Visual","Character","Settings","Credits"},Functions={["Player"]={},["Weapon"]={},["Visual"]={},["Character"]={},["Misc"]={},["Settings"]={}},Credits={[1]={Name="Developers",Content={{"ShyFlooo","Lead Programmer"},{"Delu","Programmer"}}}}} local e=loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))() local i=e:CreateWindow({Name=i,LoadingTitle=i,LoadingSubtitle="ShyFlooo",ConfigurationSaving={Enabled=true,FolderName="/mopsHub/.config",FileName=_},KeySystem=false,KeySettings={Title=i,Subtitle="Key System",Note="discord.gg/g4EGAwjUAK",FileName=".mopshubkey",SaveKey=true,GrabKeyFromSite=false,Key=""}}) n.Functions.Weapon={{Function="CreateSection",Args="━ Aim Assist ━"},{Function="CreateToggle",Args={Name="Aim Assist",Flag="_aimassist",CurrentValue=r.Aim_Assist.Enabled,Callback=function(_)r.Aim_Assist.Enabled=_ end}},{Function="CreateToggle",Args={Name="Visible Check",Flag="_aimassist_visiblecheck",CurrentValue=r.Aim_Assist.VisibleCheck,Callback=function(_)r.Aim_Assist.VisibleCheck=_ end}},{Function="CreateDropdown",Args={Name="Target Hitbox",Flag="_aimassist_targethitbox",Options={"Head","Torso"},CurrentOption=r.Aim_Assist.Target_Hitbox,Callback=function(_)r.Aim_Assist.Target_Hitbox=_ end}},{Function="CreateToggle",Args={Name="Show FOV",Flag="_aimassist_showfov",CurrentValue=r.Aim_Assist.showFOV,Callback=function(_)r.Aim_Assist.showFOV=_ end}},{Function="CreateSlider",Args={Name="FOV",Flag="_aimassist_fov",Range={0,360},Increment=1,CurrentValue=r.Aim_Assist.fov,Callback=function(_)r.Aim_Assist.fov=_ end}},{Function="CreateColorPicker",Args={Name="FOV Color",Flag="_aimassist_fov_color",Color=r.Aim_Assist.fovColor,Callback=function(_)r.Aim_Assist.fovColor=_ end}},{Function="CreateSlider",Args={Name="Smoothness",Flag="_aimassist_smoothness",Range={5,10},Increment=0.1,CurrentValue=r.Aim_Assist.Smoothness,Callback=function(_)r.Aim_Assist.Smoothness=_ end}},{Function="CreateSection",Args="━ Silent Aimbot ━"},{Function="CreateToggle",Args={Name="Silent Aim",Flag="_silentaim",CurrentValue=r.Silent_Aim.Enabled,Callback=function(_)r.Silent_Aim.Enabled=_ end}},{Function="CreateToggle",Args={Name="Visible Check",Flag="_silentaim_visiblecheck",CurrentValue=r.Silent_Aim.VisibleCheck,Callback=function(_)r.Silent_Aim.VisibleCheck=_ end}},{Function="CreateDropdown",Args={Name="Target Hitbox",Flag="_silentaim_targethitbox",Options={"Head","Torso"},CurrentOption=r.Silent_Aim.Target_Hitbox,Callback=function(_)r.Silent_Aim.Target_Hitbox=_ end}},{Function="CreateToggle",Args={Name="Show FOV",Flag="_silentaim_showfov",CurrentValue=r.Silent_Aim.showFOV,Callback=function(_)r.Silent_Aim.showFOV=_ end}},{Function="CreateSlider",Args={Name="FOV",Flag="_silentaim_fov",Range={0,360},Increment=1,CurrentValue=r.Silent_Aim.fov,Callback=function(_)r.Silent_Aim.fov=_ end}},{Function="CreateColorPicker",Args={Name="FOV Color",Flag="_silentaim_fov_color",Color=r.Silent_Aim.fovColor,Callback=function(_)r.Silent_Aim.fovColor=_ end}},{Function="CreateSection",Args="━ Gun Mods ━"},{Function="CreateToggle",Args={Name="No Recoil",Flag="_norecoil",CurrentValue=r.Gun_Mods.NoRecoil,Callback=function(_)r.Gun_Mods.NoRecoil=_ end}},{Function="CreateToggle",Args={Name="No Spread",Flag="_nospread",CurrentValue=r.Gun_Mods.NoSpread,Callback=function(_)r.Gun_Mods.NoSpread=_ end}},{Function="CreateToggle",Args={Name="Rapidfire",Flag="_nospread",CurrentValue=r.Gun_Mods.RapidFire,Callback=function(_)r.Gun_Mods.RapidFire=_ for _,_ in pairs(getgc(true))do if typeof(_)=="table"and rawget(_,"fire_rate")then _.fire_rate=5 end end end}},{Function="CreateParagraph",Args={Title="Note:",Content="Reset once to apply Rapidfire."}}} n.Functions.Visual={{Function="CreateSection",Args="━ ESP ━"},{Function="CreateToggle",Args={Name="Enabled",Flag="_esp",CurrentValue=r.ESP.Enabled,Callback=function(_)r.ESP.Enabled=_ end}},{Function="CreateToggle",Args={Name="Boxes",Flag="_esp_boxes",CurrentValue=r.ESP.Boxes,Callback=function(_)r.ESP.Boxes=_ end}},{Function="CreateToggle",Args={Name="Tracers",Flag="_esp_tracers",CurrentValue=r.ESP.Tracers,Callback=function(_)r.ESP.Tracers=_ end}},{Function="CreateDropdown",Args={Name="Tracers Orientation",Flag="_esp_tracers_orientation",CurrentOption=r.ESP.tracersOrientation,Options={"Bottom","Middle","Top"},Callback=function(_)r.ESP.tracersOrientation=_ if _=="Bottom"then r.ESP.TracerAttachShift=1 elseif _=="Middle"then r.ESP.TracerAttachShift=2 else r.ESP.TracerAttachShift=999999 end end}},{Function="CreateToggle",Args={Name="Chams",Flag="_esp_chams",CurrentValue=r.ESP.Chams,Callback=function(_)r.ESP.Chams=_ end}},{Function="CreateToggle",Args={Name="Health Bar",Flag="_esp_healthbar",CurrentValue=r.ESP.HealthBar,Callback=function(_)r.ESP.HealthBar=_ end}},{Function="CreateToggle",Args={Name="Health",Flag="_esp_health",CurrentValue=r.ESP.Health,Callback=function(_)r.ESP.Health=_ end}},{Function="CreateToggle",Args={Name="Names",Flag="_esp_names",CurrentValue=r.ESP.Names,Callback=function(_)r.ESP.Names=_ end}},{Function="CreateToggle",Args={Name="Distance",Flag="_esp_distance",CurrentValue=r.ESP.Distance,Callback=function(_)r.ESP.Distance=_ end}},{Function="CreateSection",Args="━ ESP Settings ━"},{Function="CreateToggle",Args={Name="Chams Visible Check",Flag="_esp_hightlight_target",CurrentValue=r.ESP.Chams_Visible_Check,Callback=function(_)r.ESP.Chams_Visible_Check=_ end}},{Function="CreateSection",Args="━ ESP Customization ━"},{Function="CreateColorPicker",Args={Name="Box Color",Flag="_esp_boxes_color",Color=r.ESP.BoxColor,Callback=function(_)r.ESP.BoxColor=_ end}},{Function="CreateColorPicker",Args={Name="Chams Fill Color",Flag="_esp_chamsfill_color",Color=r.ESP.ChamsFillColor,Callback=function(_)r.ESP.ChamsFillColor=_ end}},{Function="CreateColorPicker",Args={Name="Chams Outline Color",Flag="_esp_chamsoutline_color",Color=r.ESP.ChamsOutlineColor,Callback=function(_)r.ESP.ChamsOutlineColor=_ end}},{Function="CreateSlider",Args={Name="Chams Fill Transparency",Flag="_esp_chams_fill_transparency",Range={0,1},Increment=1,CurrentValue=r.ESP.ChamsFillTransparency,Callback=function(_)r.ESP.ChamsFillTransparency=_ end}},{Function="CreateSlider",Args={Name="Chams Outline Transparency",Flag="_esp_chams_outline_transparency",Range={0,1},Increment=1,CurrentValue=r.ESP.ChamsOutlineTransparency,Callback=function(_)r.ESP.ChamsOutlineTransparency=_ end}},{Function="CreateColorPicker",Args={Name="Tracer Color",Flag="_esp_tracers_color",Color=r.ESP.TracerColor,Callback=function(_)r.ESP.TracerColor=_ end}},{Function="CreateSlider",Args={Name="Text Size",Flag="_esp_text_size",Range={0,30},Increment=1,CurrentValue=r.ESP.FontSize,Callback=function(_)r.ESP.FontSize=_ end}},{Function="CreateColorPicker",Args={Name="Text Color",Flag="_esp_text_color",Color=r.ESP.TextColor,Callback=function(_)r.ESP.TextColor=_ end}},{Function="CreateToggle",Args={Name="Rainbow Colors",Flag="_esp_rainbow",CurrentValue=r.ESP.Rainbow,Callback=function(_)r.ESP.Rainbow=_ end}},{Function="CreateSection",Args="━ Hitbox Extender ━"},{Function="CreateToggle",Args={Name="Enabled",Flag="_hitboxextender",CurrentValue=r.Hitbox_Extender.Enabled,Callback=function(_)r.Hitbox_Extender.Enabled=_ end}},{Function="CreateSlider",Args={Name="Hitbox Size",Flag="_hitboxextender_size",Range={1,10},Increment=0.1,CurrentValue=r.Hitbox_Extender.Size,Callback=function(_)r.Hitbox_Extender.Size=_ end}},{Function="CreateSlider",Args={Name="Hitbox Transparency",Flag="_hitboxextender_size",Range={0,1},Increment=0.1,CurrentValue=r.Hitbox_Extender.Hitbox_Transparency,Callback=function(_)r.Hitbox_Extender.Hitbox_Transparency=_ end}}} n.Functions.Character={{Function="CreateSection",Args="━ Modifications ━"},{Function="CreateSlider",Args={Name="Walkspeed Multiplier",Flag="_character_modifications_walkspeed",Range={1,10},Increment=1,CurrentValue=r.Character_Modifications.WalkSpeedMultiplier.Multiplier,Callback=function(_)r.Character_Modifications.WalkSpeedMultiplier.Multiplier=_ end}},{Function="CreateToggle",Args={Name="Infinite Jump",Flag="_character_modifications_infinitejump",CurrentValue=r.Character_Modifications.InfiniteJump.Enabled,Callback=function(_)r.Character_Modifications.InfiniteJump.Enabled=_ end}},{Function="CreateSlider",Args={Name="Infinite Jump Height",Flag="_character_modifications_infinitejump_height",Range={0,100},Increment=1,CurrentValue=r.Character_Modifications.InfiniteJump.JumpHeight,Callback=function(_)r.Character_Modifications.InfiniteJump.JumpHeight=_ end}},{Function="CreateToggle",Args={Name="Bunny Hop",Flag="_character_modifications_bunnyhop",CurrentValue=r.Character_Modifications.Bunny_Hop.Enabled,Callback=function(_)r.Character_Modifications.Bunny_Hop.Enabled=_ end}}} n.Functions.Settings={{Function="CreateSection",Args=" ━ Script ━ "},{Function="CreateToggle",Args={Name="Auto Load Configs",Flag="_autoLoadConfigs",CurrentValue=r.Settings.autoLoadConfigs,Callback=function(_)r.Settings.autoLoadConfigs=_ r.Functions.Other.saveLocalConfig(_)end}},{Function="CreateParagraph",Args={Title="Script Informations",Content=string.format("\nScript Version: %s",c or"")}},{Function="CreateParagraph",Args={Title="Client Informations",Content=string.format("\nExecutor: %s %s\n\nClient Id: %s",f or"unknown",b or"unknown",a or"unknown")}}} do local _,a=pcall(function()for _,a in pairs(n.Tabs)do local _=i:CreateTab(a) getgenv()._WINDOW.Tabs[a]=_ end for _,_ in pairs(n.Credits)do local a="" for _,_ in pairs(_.Content)do if#_[2]>0 then a=a.."\n".._[1].." - ".._[2]else a=a.."\n".._[1]end end getgenv()._WINDOW.Tabs["Credits"]:CreateSection(string.format("━ %s ━",_.Name)) getgenv()._WINDOW.Tabs["Credits"]:CreateParagraph({Title=_.Name,Content=a})end for b,_ in pairs(n.Functions)do if r.Settings._DEBUG then rconsolewarn("[mopsHub UI Init]: Creating "..#_.." function(s) for "..b.."")end for _,e in pairs(_)do if e.Function and e.Args then local d=getgenv()._WINDOW.Tabs[b] if d then pcall(function()local c,a=e.Function,true if c=="CreateSection"then d:CreateSection(e.Args)elseif c=="CreateButton"then d:CreateButton(e.Args)elseif c=="CreateToggle"then d:CreateToggle(e.Args)elseif c=="CreateDropdown"then d:CreateDropdown(e.Args)elseif c=="CreateInput"then d:CreateInput(e.Args)elseif c=="CreateSlider"then d:CreateSlider(e.Args)elseif c=="CreateParagraph"then d:CreateParagraph(e.Args)elseif c=="CreateLabel"then d:CreateLabel(e.Args)elseif c=="CreateKeybind"then d:CreateKeybind(e.Args)elseif c=="CreateColorPicker"then d:CreateColorPicker(e.Args)else a=false end if r.Settings._DEBUG then if a then r.uiElements[tostring((e.Args.Flag)or e.Args:gsub('━',''))or"unknownElement"]=Element rconsoleinfo("[mopsHub UI Init]: Created "..tostring((e.Args.Flag and"function element"..e.Args.Flag)or"section element ["..e.Args:gsub('━','').."]").." for "..b.." ["..string.gsub(e.Function,"Create","").."]")else rconsoleerr("[mopsHub UI Init]: Invalid function [ "..tostring(e.Function).." ] for ["..b.."] index: (".._..")")end end end)end end end end end) if not _ and a then rconsoleerr(string.format("[mopsHub UI Init - Error]: Unexpected error occurred while initalizin the UI.")) rconsoleerr(string.format("Support: discord.gg/g4EGAwjUAK")) rconsoleerr("Error: "..a) i:Destroy()end end r.Functions={spawnTask=function(_)return task.spawn(_)end,renderStepped=h.RenderStepped,createFOVCircle=function()local _=Drawing.new("Circle") _.Thickness=2 _.NumSides=999 _.Filled=false _.Transparency=0.6 _.Radius=r.Silent_Aim.fov return _ end,getSolidierId=function(b)for a,_ in pairs(r.Client.globals.cli_names)do if b and b.Name==_ then return a end end end,getHealth=function(_)local _=r.Functions.getSolidierId(_) if not _ then return 0 end local _=r.Client.globals.gbl_sol_healths[_] if not _ then return 0 end return _ end,getTeam=function(_)local _=r.Functions.getSolidierId(_) if not _ then return end return r.Client.globals.cli_teams[_]end,isAlive=function(_)local a=r.Functions.getSolidierId(_) if not a then return false end if r.Client.globals.soldiers_alive[a]==true and r.Functions.getHealth(_)~=0 then return true end return false end,getPlayerFromCharacter=function(_)for a,b in pairs(r.Client.globals.soldier_models)do if b==_ then local _=r.Client.globals.cli_names[a] if _ then return j:FindFirstChild(_)end end end end,getCharacter=function(_)local _=r.Functions.getSolidierId(_) if not _ then return end return r.Client.globals.soldier_models[_]end,getHumanoid=function()return r.Client.fpv_sol_instances.humanoid end,getRootPart=function()return r.Client.fpv_sol_instances.root end,isInCircle=function(a,b,_)return(a.x-b.x*a.x-b.x)+(a.y-b.y*a.y-b.y)<=_*_ end,isVisible=function(_,b)local a={} for _,_ in pairs(workspace:GetChildren())do if _.Name=="soldier_model"then table.insert(a,_)end end b=b or{o,workspace.Terrain,r.Functions.getCharacter(p),workspace:FindFirstChild("workspace")and workspace.workspace:FindFirstChild("glass"),workspace.workspace:FindFirstChild("boundary"),unpack(a)} return#o:GetPartsObscuringTarget({_},b)==0 end,getHitboxes=function()local a={} for _,_ in pairs(workspace:GetChildren())do if _:IsA("BasePart")and _.Color==Color3.new(1,0,0)then table.insert(a,_)end end return a end,Aim_Assist={getTarget=function()local c=nil local e=nil local d=math.huge local a=m:GetMouseLocation() local _=j:GetPlayers() for _,g in pairs(_)do if g==p then continue end local _=r.Functions.getTeam(g) local b=r.Functions.getTeam(p) if _==b then continue end local b=r.Functions.getCharacter(g) if not b then continue end local _=r.Misc.Hitbox_Parts[r.Aim_Assist.Target_Hitbox] local b=b[_] if not b then continue end local _=r.Functions.getHealth(g) if not(_~=0)then continue end local f,_=o:WorldToViewportPoint(b.Position) if not _ then continue end if(r.Aim_Assist.VisibleCheck and not r.Functions.isVisible(b.Position))then continue end local _=(Vector2.new(f.X,f.Y)-a).Magnitude if _<d and _<=r.Aim_Assist.fov then d=_ c=g e=f end end return c,e end},applyProxyMetatable=function(a,c)if getmetatable(a)then return end local d={} for _ in next,c do d[_]=a[_]end setmetatable(a,{__index=function(_,b)local a=c[b] if a and d[b]then local _=a(d[b]) if _ then return _ end return d[b]end return rawget(_,b)end,__newindex=function(_,b,a)if c[b]then d[b]=a return end rawset(_,b,a)end}) for _ in next,c do rawset(a,_,nil)end end,Other={saveLocalConfig=function(c)r.Settings.autoLoadConfigs=c local b local a,_=pcall(function()b=k:JSONEncode(r.Settings)end) if a then writefile(l,tostring(b)) if r.Settings._DEBUG then rconsoleinfo("[mopsHub Debug]: Updated settings json. > autoLoadConfigs: "..tostring(c))end else writefile(l,k:JSONEncode(r.Settings)) if r.Settings._DEBUG then rconsoleerr("[mopsHub Debug - Error]: Unable to encode settings json.\nError:\n\n> ".._)end end end}} r.Functions.spawnTask(function()pcall(function()if getgenv().mopsHub then for _,_ in pairs(getgenv().mopsHub.Connections)do _:Disconnect()end for _,_ in pairs(getgenv().mopsHub.Misc.FOV_Circles)do _:Remove()end end end) r.Client.globals=getrenv()._G.globals r.Client.enums=getrenv()._G.enums r.Client.utils=getrenv()._G.utils r.Client.global_sol_state=r.Client.globals.gbl_sol_state r.Client.fpv_sol_recoil=r.Client.globals.fpv_sol_recoil r.Client.fpv_sol_spread=r.Client.globals.fpv_sol_spread r.Client.fpv_sol_equipment=r.Client.globals.fpv_sol_equipment r.Client.fpv_sol_multipliers=r.Client.globals.fpv_sol_multipliers r.Client.soldier_models=r.Client.globals.soldier_models r.Client.soldiers_alive=r.Client.globals.soldiers_alive r.Client.sol_state_class=r.Client.enums.sol_state_class r.Client.sol_firearm_operation=getrenv()._G.sol_firearm_operation r.Client.fpv_sol_instances=r.Client.globals.fpv_sol_instances r.Client.fpv_sol_instances=r.Client.globals.fpv_sol_instances r.Client.exe_set=getrenv()._G.exe_set r.Client.exe_set_t=getrenv()._G.exe_set_t for _,_ in pairs(getgc(true))do if typeof(_)=="table"and rawget(_,"FPV_SOL_EQUIP")then r.Client.event_enum=_ end end r.Misc.FOV_Circles["SilentAim"]=r.Functions.createFOVCircle() r.Misc.FOV_Circles["AimAssist"]=r.Functions.createFOVCircle() if isfile(l)then local _,a=pcall(function()local _=readfile(l) local b={} local _,a=pcall(function()b=k:JSONDecode(_)end) if _ then for _,a in pairs(b)do r.Settings[_]=a end else writefile(l,k:JSONEncode(r.Settings)) if r.Settings._DEBUG then rconsoleerr("[mopsHub Debug - Error]: Unable to parse local settings json.\nError:\n\n> "..a)end end end) if not _ and a then print(a)end else r.Settings.autoLoadConfigs=false writefile(l,tostring(k:JSONEncode(r.Settings))) if r.Settings._DEBUG then print("[mopsHub - Debug]: created local config file.")end end end) r.Connections["_silentAim_targetUpdate"]=r.Functions.renderStepped:Connect(function()local c=workspace.CurrentCamera.ViewportSize/2 local a=r.Functions.getCharacter(p) local _=r.Functions.getHealth(p) local b=r.Functions.getTeam(p) if not a then return end if _<=0 then return end local e={} for _,g in next,j:GetPlayers()do if g==p then continue end local f=r.Functions.getCharacter(g) local a=r.Functions.getHealth(g) local _=r.Functions.getTeam(g) local d=f and f:FindFirstChild(r.Misc.Hitbox_Parts[r.Silent_Aim.Target_Hitbox]) if a>0 and f and _~=b and d then local a,_=workspace.CurrentCamera:WorldToViewportPoint(d.Position) if not _ then continue end local _=Vector2.new(a.X,a.Y) if not r.Functions.isInCircle(_,c,r.Silent_Aim.fov)then continue end if(r.Silent_Aim.VisibleCheck and not r.Functions.isVisible(d.Position))then continue end local _=math.floor((_-c).Magnitude) table.insert(e,{Player=g,Distance=_,Character=f})end end table.sort(e,function(_,a)return _.Distance<a.Distance end) local _=e[1] if _ then local _=_.Player r.Misc.Silent_Aim_Target=_ else r.Misc.Silent_Aim_Target=nil end end) r.Functions.spawnTask(function()local a=nil local function _(_,...)local c={...} if _==r.Client.exe_set_t.FPV_SOL_BULLET_SPAWN then local _=debug.getstack(3) local a=nil for _,_ in next,_ do if type(_)=='table'and type(rawget(_,'fire_params'))=='table'then a=_ break end end if r.Silent_Aim.Enabled and r.Misc.Silent_Aim_Target and a then local _=r.Functions.getCharacter(r.Misc.Silent_Aim_Target) local b=_ and _:FindFirstChild('HumanoidRootPart') if b then local _=a.fire_params local a=a.fire_multipliers local _=_.muzzle_velocity*a.muzzle_velocity c[4]=CFrame.lookAt(c[3],b.CFrame.p).LookVector*(_*1)end end end return a(_,unpack(c))end a=hookfunction(r.Client.exe_set,function(...)return _(...)end)end) r.Connections["_aimAssist_inputBegan"]=m.InputBegan:Connect(function(a,_)if a.UserInputType==Enum.UserInputType.MouseButton2 and r.Aim_Assist.Enabled then r.Misc.Aim_Assist_Active=true end end) r.Connections["_aimAssist_inputended"]=m.InputEnded:Connect(function(a,_)if a.UserInputType==Enum.UserInputType.MouseButton2 and r.Aim_Assist.Enabled then r.Misc.Aim_Assist_Active=false end end) r.Connections["_aimAssist_update"]=r.Functions.renderStepped:Connect(function()if r.Aim_Assist.Enabled and r.Misc.Aim_Assist_Active then local _,a=r.Functions.Aim_Assist.getTarget() if not _ then return end local _=m:GetMouseLocation() mousemoverel((a.X-_.X)/r.Aim_Assist.Smoothness,(a.Y-_.Y)/r.Aim_Assist.Smoothness)end end) r.Functions.spawnTask(function()if getgenv().esp then getgenv().esp:unload()end local q={cache={}} function q:unload()for a,_ in next,q.cache do getgenv().esp.remove_plr(a)end getgenv().esp_loop=nil end function q.rotatev2(b,a)local _=math.math.cos(a) local a=math.math.sin(a) return Vector2.new(_*b.X-a*b.Y,a*b.X+_*b.Y)end function q.getmagnitude(_,a)return(_-a).Magnitude end function q.getprimarypart(_)local _=_~=nil and _:FindFirstChild('HumanoidRootPart') return _ end function q.inst(a,_)local b=Instance.new(a) local _,_=pcall(function()for _,a in next,_ do b[_]=a end end) return b end function q.draw(_,a)local b=Drawing.new(_) local _,_=pcall(function()for a,_ in next,a do b[a]=_ end end) return b end function q.setall(_,b,a)for _,c in next,_ do if tostring(c)~='Highlight'and tostring(_)~='arrow'and tostring(_)~='arrow_outline'then c[b]=a end end end function q.remove_plr(_)if rawget(q.cache,_)then for _,_ in pairs(q.cache[_])do _:Remove()end q.cache[_]=nil end end function q.check(_)local c=true if _:FindFirstChild("friendly_marker")then c=false end if not _.Parent==workspace then c=false end local b=r.Functions.getPlayerFromCharacter(_) local _=r.Functions.getTeam(b) local a=r.Functions.getTeam(p) if _==a then c=false end if b then if not r.Functions.isAlive(b)then c=false end end if not(r.Functions.getHealth(b)~=0)then c=false end return c end function q.add_plr(_)local a={} a.inner_box=q.draw('Square',{Filled=true}) a.tracer=q.draw('Line',{Thickness=1}) a.box_outline=q.draw('Square',{Filled=false,Transparency=1,Thickness=3}) a.box=q.draw('Square',{Filled=false,Transparency=1,Thickness=1}) a.name_bold=q.draw('Text',{Center=true,Outline=false,Transparency=1}) a.distance=q.draw('Text',{Center=true}) a.highlight=q.inst('Highlight',{}) a.health=q.draw('Text',{Center=false}) a.healthbar_outline=q.draw('Line',{Thickness=3}) a.healthbar=q.draw('Line',{Thickness=1}) a.name=q.draw('Text',{Center=true}) a.highlight=q.inst('Highlight',{}) q.cache[_]=a end function q.update_esp(j,p)local i=j:FindFirstChild('HumanoidRootPart') local h=r.Functions.getPlayerFromCharacter(j) local k,a=o.WorldToViewportPoint(o,i.Position) local l if h then l=r.Functions.getHealth(h)end local _=1/(k.Z*math.tan(math.rad(o.FieldOfView*0.5))*2)*100 local _,b=math.floor(45*_),math.floor(65*_) local m=Vector2.new(_,b) if m.X<3 or m.Y<6 then m=Vector2.new(5,10)end local n=Vector2.new(k.X-m.X/2,k.Y-m.Y/2) n=Vector2.new(math.floor(n.X),math.floor(n.Y)) local f=0 local _=0 local e=Vector2.new(math.floor(m.X/2+n.X),math.floor(m.Y+n.Y+1)) local g=Vector2.new(math.floor(m.X/2+n.X),math.floor(n.Y-16)) local c=q.getmagnitude(i.Position,o.CFrame.Position) local b=q.check(j) local _,a=pcall(function()if a and b then if r.ESP.Tracers then p.tracer.Visible=true p.tracer.From=Vector2.new(k.X,k.Y)+Vector2.new(0,m.Y/2) p.tracer.To=Vector2.new(o.ViewportSize.X/2,o.ViewportSize.Y/r.ESP.TracerAttachShift or 1) p.tracer.Color=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.TracerColor else p.tracer.Visible=false end if r.ESP.Chams and l>0 then p.highlight.Parent=d p.highlight.Adornee=j p.highlight.Enabled=true p.highlight.DepthMode=r.ESP.Chams_Visible_Check and Enum.HighlightDepthMode.Occluded or Enum.HighlightDepthMode.AlwaysOnTop p.highlight.FillTransparency=r.ESP.ChamsFillTransparency p.highlight.OutlineTransparency=r.ESP.ChamsOutlineTransparency if r.ESP.Highlight_Target and r.Functions.isVisible(i.Position)then p.highlight.FillColor=Color3.fromRGB(0,255,0) p.highlight.OutlineColor=Color3.fromRGB(0,255,0)else p.highlight.FillColor=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.ChamsFillColor p.highlight.OutlineColor=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.ChamsOutlineColor end else p.highlight.Enabled=false end if r.ESP.Boxes then p.box.Visible=true p.box.Size=m p.box.Position=n p.box.Color=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.BoxColor p.box_outline.Size=m p.box_outline.Position=n p.box_outline.Visible=false p.box_outline.Color=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.BoxColor p.inner_box.Size=Vector2.new(p.box.Size.X-3,p.box.Size.Y-3) p.inner_box.Position=Vector2.new(n.X+1.5,n.Y+1.5) p.inner_box.Transparency=0.5 p.inner_box.Color=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.BoxColor p.inner_box.Visible=false else p.box.Visible=false end if r.ESP.HealthBar then p.healthbar.Transparency=1 p.healthbar_outline.Transparency=1 p.healthbar.Visible=true p.healthbar.Color=Color3.fromRGB(255,0,0):Lerp(Color3.fromRGB(0,255,0),l/100) p.healthbar.From=Vector2.new((n.X-5),n.Y+m.Y) p.healthbar.To=Vector2.new(p.healthbar.From.X,p.healthbar.From.Y-(l/100)*m.Y) p.healthbar_outline.Visible=false p.healthbar_outline.Color=Color3.fromRGB(255,255,255) p.healthbar_outline.From=Vector2.new(p.healthbar.From.X,n.Y+m.Y+1) p.healthbar_outline.To=Vector2.new(p.healthbar.From.X,(p.healthbar.From.Y-1*m.Y)-1)else p.healthbar.Visible=false p.healthbar_outline.Visible=false end if r.ESP.Names then p.name.Transparency=1 p.name_bold.Transparency=0.5 p.name.Visible=true p.name.Text=tostring(h) p.name.Size=r.ESP.FontSize p.name.Font=2 p.name.Color=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.TextColor p.name.Outline=false p.name.OutlineColor=Color3.fromRGB(255,255,255) p.name.Position=Vector2.new(g.X,g.Y-(_))else p.name.Visible=false p.name_bold.Visible=false end if r.ESP.Health then local _=Vector2.new((n.X-5),n.Y+m.Y) local _=Vector2.new(_.X,_.Y-1*m.Y) p.health.Transparency=1 p.health.Visible=true p.health.Text=tostring(math.floor(l)) p.health.Size=r.ESP.FontSize p.health.Font=2 p.health.Color=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.TextColor p.health.Outline=false p.health.OutlineColor=Color3.fromRGB(255,255,255) p.health.Position=Vector2.new(n.X-30,_.Y)else p.health.Visible=false end if r.ESP.Distance then p.distance.Transparency=1 p.distance.Visible=true p.distance.Text=tostring(math.floor(c))..'s' p.distance.Size=r.ESP.FontSize p.distance.Font=2 p.distance.Color=(r.ESP.Rainbow and Color3.fromHSV(tick()%5/5,1+0,1))or r.ESP.TextColor p.distance.Outline=false p.distance.OutlineColor=Color3.fromRGB(255,255,255) p.distance.Position=Vector2.new(e.X,e.Y+f) f+=14 else p.distance.Visible=false end else q.setall(p,'Visible',false)end end) if not _ and a then printconsole(a,255,0,0) q.setall(p,'Visible',false) p.highlight.Enabled=false end end for _,_ in next,workspace:GetChildren()do if _.Name=="soldier_model"and r.Functions.getPlayerFromCharacter(_)~=p then q.add_plr(_)end end workspace.ChildAdded:Connect(function(_)if _.Name=="soldier_model"then q.add_plr(_)end end) workspace.ChildRemoved:Connect(function(_)if _.Name=="soldier_model"then q.remove_plr(_)end end) r.Connections["_espUpdate"]=h.RenderStepped:Connect(function()for a,_ in next,q.cache do if _ and a then q.update_esp(a,_)end end end) getgenv().esp=q end) r.Functions.spawnTask(function()local function b(a,_)if a~=nil then _(a)end end game:GetService('UserInputService').InputBegan:Connect(function(_)if _.UserInputType==Enum.UserInputType.Keyboard and _.KeyCode==Enum.KeyCode.Space then local _=r.Functions.getHumanoid() local a=r.Functions.getRootPart() if not r.Character_Modifications.InfiniteJump.Enabled then return end if not _ or not a then return end b(_,function(_)if _:GetState()==Enum.HumanoidStateType.Jumping or _:GetState()==Enum.HumanoidStateType.Freefall then b(a,function(_)_.Velocity=Vector3.new(0,r.Character_Modifications.InfiniteJump.JumpHeight or 50,0)end)end end)end end)end) r.Connections["_charmods"]=r.Functions.renderStepped:Connect(function()if r.Client.fpv_sol_multipliers then r.Client.fpv_sol_multipliers.movement=r.Character_Modifications.WalkSpeedMultiplier.Multiplier end end) r.Functions.spawnTask(function()local a=r.Client.fpv_sol_spread.spread local b=r.Client.fpv_sol_recoil.attitude_delta setmetatable(r.Client.fpv_sol_spread,{__index=function(_,b)if b=='spread'then if r.Gun_Mods.NoSpread then return 0 end return a end return rawget(_,b)end,__newindex=function(_,c,b)if c=='spread'then a=b return end rawset(_,c,b)end}) setmetatable(r.Client.fpv_sol_recoil,{__index=function(_,a)if a=='attitude_delta'then if r.Gun_Mods.NoRecoil then return Vector3.new()end return b end return rawget(_,a)end,__newindex=function(_,c,a)if c=='attitude_delta'then b=a return end rawset(_,c,a)end}) rawset(r.Client.fpv_sol_spread,'spread',nil) rawset(r.Client.fpv_sol_recoil,'attitude_delta',nil) if g and not iskrnlclosure then local b=r.Client.utils.math_util.eval_udho local function c(...)if r.Gun_Mods.NoRecoil and debug.info(2,'s'):find('recoil_anim')then return 0,0 end return b(...)end r.Client.utils.math_util.eval_udho=c for _,d in next,getgc()do if type(d)=='function'then if islclosure(d)and(not g(d))then local _=getupvalues(d) for a,_ in next,_ do if _==b then setupvalue(d,a,c)end end end end end end end) r.Connections["_fovUpdate"]=r.Functions.renderStepped:Connect(function()if r.Misc.FOV_Circles.SilentAim then r.Misc.FOV_Circles.SilentAim.Position=m:GetMouseLocation() r.Misc.FOV_Circles.SilentAim.Radius=r.Silent_Aim.fov r.Misc.FOV_Circles.SilentAim.Visible=r.Silent_Aim.showFOV and r.Silent_Aim.Enabled r.Misc.FOV_Circles.SilentAim.Color=r.Silent_Aim.fovColor end if r.Misc.FOV_Circles.AimAssist then r.Misc.FOV_Circles.AimAssist.Position=m:GetMouseLocation() r.Misc.FOV_Circles.AimAssist.Radius=r.Aim_Assist.fov r.Misc.FOV_Circles.AimAssist.Visible=r.Aim_Assist.showFOV and r.Aim_Assist.Enabled r.Misc.FOV_Circles.AimAssist.Color=r.Aim_Assist.fovColor end end) r.Connections["_hitboxExtender"]=r.Functions.renderStepped:Connect(function()local _=r.Functions.getHitboxes() for _,_ in pairs(_)do if r.Hitbox_Extender.Enabled then if not r.Misc.hitboxExtenderEnabledOnce then r.Misc.hitboxExtenderEnabledOnce=true end _.Size=Vector3.new(r.Hitbox_Extender.Size,r.Hitbox_Extender.Size,r.Hitbox_Extender.Size) _.Transparency=r.Hitbox_Extender.Hitbox_Transparency else if r.Misc.hitboxExtenderEnabledOnce then r.Misc.hitboxExtenderEnabledOnce=false _.Size=Vector3.new(1,1,1) _.Transparency=1 end end end end) r.Connections["_bunnyHop"]=r.Functions.renderStepped:Connect(function()if r.Character_Modifications.Bunny_Hop.Enabled and m:IsKeyDown(Enum.KeyCode.Space)then local _=r.Functions.getHumanoid() if _ then local a=4 a=a and(2*game.Workspace.Gravity*a)^0.5 or 40 _.Jump=true _.JumpPower=a end end end) if r.Settings.autoLoadConfigs then e:LoadConfiguration() if r.uiElements["_autoLoadConfigs"]then r.uiElements["_autoLoadConfigs"]:Set(r.Settings.autoLoadConfigs)end if r.Settings._DEBUG then rconsoleinfo("[mopsHub - Debug]: loaded config from previous session")end end getgenv().mopsHub=r
+                printconsole(string.format("[mØpsHub]: Framwork loaded in %s second(s).", tick()-_startTick))
+                if (syn and not isactor()) then printconsole("state: manual actor bypass") else printconsole("state: frontlines actor lua state") end
+            ]] .. "]])()")
+        end
+    end)
+    local Success = pcall(function()
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId)
+    end)
+    if not Success then
+        TeleportService:Teleport(game.PlaceId)
+    end
+else
+    if (isactor and not isactor() and getactors and syn.run_on_actor) then
+        local frontlines_client_actor = nil
+        --for _,v in pairs(getactors()) do
+        --    if v.Name == "frontlines_client_actor" or v.Name == "frontlines_client" then frontlines_client_actor = v end
+        --end
+        frontlines_client_actor = Player.PlayerScripts:FindFirstChildOfClass("Actor")
+        if not (frontlines_client_actor) then return Player:Kick("[mØpsHub - Error]: frontlines_client_actor not found. ") end
+        syn.run_on_actor(frontlines_client_actor, [[
+            --mopsHub SCRIPTNAME | 2023
+            --Written by mopsfl
+            getactors = getactors
+            getgenv = getgenv
+            getrenv = getrenv
+            syn = syn
+            setreadonly = setreadonly
+            hookmetamethod = hookmetamethod
+            checkcaller = checkcaller
+            writeclipboard = writeclipboard
+            identifyexecutor = identifyexecutor
+            rconsoleprint = rconsoleprint or print
+            rconsoleclear = rconsoleclear
+            rconsoleerr = rconsoleerr
+            rconsoleinfo = rconsoleinfo
+            rconsolename = rconsolename
+            rconsolewarn = rconsolewarn
+            hookfunction = hookfunction
+            printconsole = printconsole
+            getgc = getgc
+            Drawing = Drawing
+            mousemoverel = mousemoverel
+            getrawmetatable = getrawmetatable
+            islclosure = islclosure
+            getupvalues = getupvalues
+            setupvalue = setupvalue
+            getinfo = getinfo
+            is_synapse_function = is_synapse_function
+            iskrnlclosure = iskrnlclosure
+            isourclosure = isourclosure
+            queue_on_teleport = queue_on_teleport
+            fluxus = fluxus
+            isactor = isactor
+            isfile = isfile
+            writefile = writefile
+            readfile = readfile
+
+            if writeclipboard then writeclipboard(".") end
+            repeat task.wait() until game:IsLoaded()
+
+            local _startTick = tick()
+            printconsole("[mØpsHub]: Framework loading...")
+
+            --Modules
+            local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/Dynissimo/main/Scripts/AkaliNotif.lua"))(); Notify = Notify.Notify
+
+            --Variables
+            local ScriptVersion = "1.0.5"
+
+            local Players = game:GetService("Players")
+            local Player = Players.LocalPlayer
+            local Mouse = Player:GetMouse()
+            local RunService = game:GetService("RunService")
+            local TweenService = game:GetService("TweenService")
+            local UserInputService = game:GetService("UserInputService")
+            local CoreGui = game:GetService("CoreGui")
+            local Camera = game:GetService("Workspace").CurrentCamera
+            local Debris = game:GetService("Debris")
+            local HttpService = game:GetService("HttpService")
+            local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+            local CollectionService = game:GetService("CollectionService")
+
+            local FileName = string.format("mopshub_%s", game.PlaceId)
+            local ExecutorName, ExecutorVersion = identifyexecutor()
+            local ScriptTitle = string.format("mØpsHub - %s - %s", "FRONTLINES", ExecutorName)
+            local ConfigFilePath = "/mopsHub/settings_frontlines_premium.mhs"
+            local ClientId = RbxAnalyticsService:GetClientId()
+
+            local closureCheck = (syn and is_synapse_function) or iskrnlclosure or isourclosure
+
+            local mopsHub = {
+                Settings = { _DEBUG = false },
+
+                Aim_Assist = { Enabled = false, VisibleCheck = false, Target_Hitbox = "Torso", Smoothness = 8, showFOV = false, fov = 180, fovColor = Color3.fromRGB(0,255,0) },
+                Silent_Aim = { Enabled = false, VisibleCheck = false, Target_Hitbox = "Head", HitChance = 0.5, HeadChance = 0.5, Randomization = 0.5, showFOV = false, fov = 180, TriggerBot = false, fovColor = Color3.fromRGB(0,255,0) },
+                ESP = { Enabled = false, Boxes = false, Tracers = false, TracerAttachShift = 1, tracersOrientation = "Bottom", Health = false, HealthBar = false, Names = false, Distance = false, Weapon = false, Chams = false, FontSize = 13, BoxColor = Color3.fromRGB(255,255,255), ChamsOutlineColor = Color3.fromRGB(255,255,255), ChamsFillColor = Color3.fromRGB(255,0,0), ChamsFillTransparency = 0.5, ChamsOutlineTransparency = 0.5, TextColor = Color3.fromRGB(255,255,255), TracerColor = Color3.fromRGB(255,255,255), TextSize = 8, Rainbow = false, SavedColors = {}, Highlight_Target = false, Chams_Visible_Check = false, },
+                Character_Modifications = { WalkSpeedMultiplier = { Multiplier = 1 }, InfiniteJump = { Enabled = false, JumpHeight = 55 }, Bunny_Hop = { Enabled = false, Power = 4 }, No_Fall_Damage = { Enabled = false } },
+                Gun_Mods = { NoRecoil = false, NoSpread = false, RapidFire = false, },
+                Hitbox_Extender = { Enabled = false, Size = 3, Hitbox_Transparency = 0.5, Target_Hitbox = "Head", TeamCheck = false },
+                Chat_Spam = { Enabled = false, Message = false, Interval = 2, CustomColorEnabled = false, CustomColor = Color3.fromRGB(0,255,0) },
+
+                KillAll = false,
+                KillAura = false,
+
+                Functions = {},
+                Connections = {},
+                uiElements = {},
+                Client = {
+                    globals = nil,
+                    enums = nil,
+                    utils = nil,
+                    event_enum = nil,
+                    global_sol_state = nil,
+                    fpv_sol_recoil = nil,
+                    fpv_sol_spread = nil,
+                    fpv_sol_equipment = nil,
+                    fpv_sol_multipliers = nil,
+                    fpv_sol_instances = nil,
+                    soldier_models = nil,
+                    soldiers_alive = nil,
+                    sol_state_class = nil,
+                    sol_firearm_operation = nil,
+                    sol_time_sequence_value = nil,
+                    soldier_hitbox_hash = nil,
+                    soldier_hitbox_id_hash = nil,
+                    null_net_msg_state = nil,
+                    tpv_sol_joint_t = nil,
+                    cli_state = nil,
+                    exe_set_t = nil,
+                    exe_set = nil,
+                },
+                Misc = {
+                    FOV_Circles = {},
+                    Silent_Aim_Target = nil,
+                    hitboxExtenderEnabledOnce = false,
+
+                    Hitbox_Parts = {
+                        ["Head"] = "TPVBodyVanillaHead",
+                        ["Torso"] = "HumanoidRootPart",
+                    },
+                    Aim_Assist_Active = false,
+                    fire_rates = {},
+                    killall_target = nil,
+                    Hitbox_IDs = {
+                        ["Head"] = 6,
+                        ["Torso"] = 1,
+                    },
+                    Hitbox_Sizes = {
+                        ["ROOT_M"] = Vector3.new(1, 1, 2),
+                        ["HEAD_M"] = Vector3.new(2, 1.2, 1.2),
+                    }
+                },
+            }
+
+            getgenv()._WINDOW = { Tabs = {} }
+
+            local UI = {
+                Tabs = {
+                    "Weapon",
+                    "Visual",
+                    "Character",
+                    "Misc",
+                    "Settings",
+                    "Credits"
+                },
+                Functions = {
+                    ["Player"] = {},
+                    ["Weapon"] = {},
+                    ["Visual"] = {},
+                    ["Character"] = {},
+                    ["Misc"] = {},
+                    ["Settings"] = {},
+                },
+                Credits = {
+                    [1] = {
+                        Name = "Developers",
+                        Content = {
+                            { "mopsfl", "Lead Programmer" },
+                        },
+                    }
+                },
+            }
+
+            local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+            local Window = Rayfield:CreateWindow({
+                Name = ScriptTitle,
+                LoadingTitle = ScriptTitle,
+                LoadingSubtitle = "mØpsHub",
+                ConfigurationSaving = {
+                    Enabled = true,
+                    FolderName = "/mopsHub/.config",
+                    FileName = FileName
+                },
+                KeySystem = false,
+                KeySettings = {
+                    Title = ScriptTitle,
+                    Subtitle = "Key System",
+                    Note = ".",
+                    FileName = ".mopshubkey",
+                    SaveKey = true,
+                    GrabKeyFromSite = false,
+                    Key = ""
+                }
+            })
+
+            UI.Functions.Weapon = {
+                { Function = "CreateSection", Args = "━ Aim Assist ━" },
+                { Function = "CreateToggle", Args = { Name = "Aim Assist", Flag = "_aimassist", CurrentValue = mopsHub.Aim_Assist.Enabled, Callback = function(Value) mopsHub.Aim_Assist.Enabled = Value end } },
+                --{ Function = "CreateToggle", Args = { Name = "Visible Check", Flag = "_aimassist_visiblecheck", CurrentValue = mopsHub.Aim_Assist.VisibleCheck, Callback = function(Value) mopsHub.Aim_Assist.VisibleCheck = Value end } },
+                { Function = "CreateDropdown", Args = { Name = "Target Hitbox", Flag = "_aimassist_targethitbox", Options = { "Head", "Torso" }, CurrentOption = mopsHub.Aim_Assist.Target_Hitbox, Callback = function(Value) mopsHub.Aim_Assist.Target_Hitbox = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Show FOV", Flag = "_aimassist_showfov", CurrentValue = mopsHub.Aim_Assist.showFOV, Callback = function(Value) mopsHub.Aim_Assist.showFOV = Value end } },
+                { Function = "CreateSlider", Args = { Name = "FOV", Flag = "_aimassist_fov", Range = {0,360}, Increment = 1, CurrentValue = mopsHub.Aim_Assist.fov, Callback = function(Value) mopsHub.Aim_Assist.fov = Value end } },
+                { Function = "CreateColorPicker", Args = { Name = "FOV Color", Flag = "_aimassist_fov_color", Color = mopsHub.Aim_Assist.fovColor, Callback = function(Value) mopsHub.Aim_Assist.fovColor = Value end } },
+                { Function = "CreateSlider", Args = { Name = "Smoothness", Flag = "_aimassist_smoothness", Range = {5,10}, Increment = 0.1, CurrentValue = mopsHub.Aim_Assist.Smoothness, Callback = function(Value) mopsHub.Aim_Assist.Smoothness = Value end } },
+
+                { Function = "CreateSection", Args = "━ Silent Aimbot ━" },
+                { Function = "CreateToggle", Args = { Name = "Silent Aim", Flag = "_silentaim", CurrentValue = mopsHub.Silent_Aim.Enabled, Callback = function(Value) mopsHub.Silent_Aim.Enabled = Value end } },
+                --{ Function = "CreateToggle", Args = { Name = "Visible Check", Flag = "_silentaim_visiblecheck", CurrentValue = mopsHub.Silent_Aim.VisibleCheck, Callback = function(Value) mopsHub.Silent_Aim.VisibleCheck = Value end } },
+                --{ Function = "CreateSlider", Args = { Name = "Position Randomization", Flag = "_silentaim_posrandomization", Range = {0,1}, Increment = 0.1, CurrentValue = mopsHub.Silent_Aim.Randomization, Callback = function(Value) mopsHub.Silent_Aim.Randomization = Value end } },
+                --{ Function = "CreateSlider", Args = { Name = "Hit Chance", Flag = "_silentaim_hitchance", Range = {0,1}, Increment = 0.1, CurrentValue = mopsHub.Silent_Aim.HitChance, Callback = function(Value) mopsHub.Silent_Aim.HitChance = Value end } },
+                --{ Function = "CreateSlider", Args = { Name = "Head Hit Chance", Flag = "_silentaim_headhitchance", Range = {0,1}, Increment = 0.1, CurrentValue = mopsHub.Silent_Aim.HeadChance, Callback = function(Value) mopsHub.Silent_Aim.HeadChance = Value end } },
+                { Function = "CreateDropdown", Args = { Name = "Target Hitbox", Flag = "_silentaim_targethitbox", Options = { "Head", "Torso" }, CurrentOption = mopsHub.Silent_Aim.Target_Hitbox, Callback = function(Value) mopsHub.Silent_Aim.Target_Hitbox = Value end } },
+                --{ Function = "CreateToggle", Args = { Name = "Triggerbot", Flag = "_silentaim_triggerbot", CurrentValue = mopsHub.Silent_Aim.TriggerBot, Callback = function(Value) mopsHub.Silent_Aim.TriggerBot = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Show FOV", Flag = "_silentaim_showfov", CurrentValue = mopsHub.Silent_Aim.showFOV, Callback = function(Value) mopsHub.Silent_Aim.showFOV = Value end } },
+                { Function = "CreateSlider", Args = { Name = "FOV", Flag = "_silentaim_fov", Range = {0,360}, Increment = 1, CurrentValue = mopsHub.Silent_Aim.fov, Callback = function(Value) mopsHub.Silent_Aim.fov = Value end } },
+                { Function = "CreateColorPicker", Args = { Name = "FOV Color", Flag = "_silentaim_fov_color", Color = mopsHub.Silent_Aim.fovColor, Callback = function(Value) mopsHub.Silent_Aim.fovColor = Value end } },
+
+                { Function = "CreateSection", Args = "━ Kill Aura ━" },
+                { Function = "CreateToggle", Args = { Name = "Enabled", Flag = "_killaura", CurrentValue = mopsHub.KillAura, Callback = function(Value) mopsHub.KillAura = Value end } },
+
+                { Function = "CreateSection", Args = "━ Gun Mods ━" },
+                { Function = "CreateToggle", Args = { Name = "No Recoil", Flag = "_norecoil", CurrentValue = mopsHub.Gun_Mods.NoRecoil, Callback = function(Value) mopsHub.Gun_Mods.NoRecoil = Value end } },
+                { Function = "CreateToggle", Args = { Name = "No Spread", Flag = "_nospread", CurrentValue = mopsHub.Gun_Mods.NoSpread, Callback = function(Value) mopsHub.Gun_Mods.NoSpread = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Rapidfire", Flag = "_nospread", CurrentValue = mopsHub.Gun_Mods.RapidFire, Callback = function(Value) mopsHub.Gun_Mods.RapidFire = Value; for _,v in pairs(getgc(true)) do if typeof(v) == "table" and rawget(v, "fire_rate") then v.fire_rate = 5 end end end } },
+                { Function = "CreateParagraph", Args = { Title = "Note:", Content = "Reset once to apply Rapidfire." } },
+
+            }
+
+            UI.Functions.Visual = {
+                { Function = "CreateSection", Args = "━ ESP ━" },
+                { Function = "CreateToggle", Args = { Name = "Enabled", Flag = "_esp", CurrentValue = mopsHub.ESP.Enabled, Callback = function(Value) mopsHub.ESP.Enabled = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Boxes", Flag = "_esp_boxes", CurrentValue = mopsHub.ESP.Boxes, Callback = function(Value) mopsHub.ESP.Boxes = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Tracers", Flag = "_esp_tracers", CurrentValue = mopsHub.ESP.Tracers, Callback = function(Value) mopsHub.ESP.Tracers = Value end } },
+                { Function = "CreateDropdown", Args = { Name = "Tracers Orientation", Flag = "_esp_tracers_orientation", CurrentOption = mopsHub.ESP.tracersOrientation, Options = { "Bottom", "Middle", "Top" }, Callback = function(Value) mopsHub.ESP.tracersOrientation = Value if Value == "Bottom" then mopsHub.ESP.TracerAttachShift = 1 elseif Value == "Middle" then mopsHub.ESP.TracerAttachShift = 2 else mopsHub.ESP.TracerAttachShift = 999999 end end } },
+                { Function = "CreateToggle", Args = { Name = "Chams", Flag = "_esp_chams", CurrentValue = mopsHub.ESP.Chams, Callback = function(Value) mopsHub.ESP.Chams = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Health Bar", Flag = "_esp_healthbar", CurrentValue = mopsHub.ESP.HealthBar, Callback = function(Value) mopsHub.ESP.HealthBar = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Health", Flag = "_esp_health", CurrentValue = mopsHub.ESP.Health, Callback = function(Value) mopsHub.ESP.Health = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Names", Flag = "_esp_names", CurrentValue = mopsHub.ESP.Names, Callback = function(Value) mopsHub.ESP.Names = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Distance", Flag = "_esp_distance", CurrentValue = mopsHub.ESP.Distance, Callback = function(Value) mopsHub.ESP.Distance = Value end } },
+                { Function = "CreateSection", Args = "━ ESP Settings ━" },
+                --{ Function = "CreateToggle", Args = { Name = "Highlight Visible Targets", Flag = "_esp_hightlight_target", CurrentValue = mopsHub.ESP.Highlight_Target, Callback = function(Value) mopsHub.ESP.Highlight_Target = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Chams Visible Check", Flag = "_esp_hightlight_target", CurrentValue = mopsHub.ESP.Chams_Visible_Check, Callback = function(Value) mopsHub.ESP.Chams_Visible_Check = Value end } },
+
+                { Function = "CreateSection", Args = "━ ESP Customization ━" },
+                { Function = "CreateColorPicker", Args = { Name = "Box Color", Flag = "_esp_boxes_color", Color = mopsHub.ESP.BoxColor, Callback = function(Value) mopsHub.ESP.BoxColor = Value end } },
+                { Function = "CreateColorPicker", Args = { Name = "Chams Fill Color", Flag = "_esp_chamsfill_color", Color = mopsHub.ESP.ChamsFillColor, Callback = function(Value) mopsHub.ESP.ChamsFillColor = Value end } },
+                { Function = "CreateColorPicker", Args = { Name = "Chams Outline Color", Flag = "_esp_chamsoutline_color", Color = mopsHub.ESP.ChamsOutlineColor, Callback = function(Value) mopsHub.ESP.ChamsOutlineColor = Value end } },
+                { Function = "CreateSlider", Args = { Name = "Chams Fill Transparency", Flag = "_esp_chams_fill_transparency", Range = {0,1}, Increment = 1, CurrentValue = mopsHub.ESP.ChamsFillTransparency, Callback = function(Value) mopsHub.ESP.ChamsFillTransparency = Value end } },
+                { Function = "CreateSlider", Args = { Name = "Chams Outline Transparency", Flag = "_esp_chams_outline_transparency", Range = {0,1}, Increment = 1, CurrentValue = mopsHub.ESP.ChamsOutlineTransparency, Callback = function(Value) mopsHub.ESP.ChamsOutlineTransparency = Value end } },
+                { Function = "CreateColorPicker", Args = { Name = "Tracer Color", Flag = "_esp_tracers_color", Color = mopsHub.ESP.TracerColor, Callback = function(Value) mopsHub.ESP.TracerColor = Value end } },
+                { Function = "CreateSlider", Args = { Name = "Text Size", Flag = "_esp_text_size", Range = {0,30}, Increment = 1, CurrentValue = mopsHub.ESP.FontSize, Callback = function(Value) mopsHub.ESP.FontSize = Value end } },
+                { Function = "CreateColorPicker", Args = { Name = "Text Color", Flag = "_esp_text_color", Color = mopsHub.ESP.TextColor, Callback = function(Value) mopsHub.ESP.TextColor = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Rainbow Colors", Flag = "_esp_rainbow", CurrentValue = mopsHub.ESP.Rainbow, Callback = function(Value) mopsHub.ESP.Rainbow = Value end } },
+
+                { Function = "CreateSection", Args = "━ Hitbox Extender ━" },
+                { Function = "CreateToggle", Args = { Name = "Enabled", Flag = "_hitboxextender", CurrentValue = mopsHub.Hitbox_Extender.Enabled, Callback = function(Value) mopsHub.Hitbox_Extender.Enabled = Value end } },
+                { Function = "CreateDropdown", Args = { Name = "Target Hitbox", Flag = "_hitboxextender_targethitbox", Options = {"All", "Head", "Torso"}, CurrentOption = mopsHub.Hitbox_Extender.Target_Hitbox, Callback = function(Value) mopsHub.Hitbox_Extender.Target_Hitbox = Value end } },
+                { Function = "CreateSlider", Args = { Name = "Hitbox Size", Flag = "_hitboxextender_size", Range = {1,10}, Increment = 0.1, CurrentValue = mopsHub.Hitbox_Extender.Size, Callback = function(Value) mopsHub.Hitbox_Extender.Size = Value end } },
+                { Function = "CreateSlider", Args = { Name = "Hitbox Transparency", Flag = "_hitboxextender_transparency", Range = {0,1}, Increment = 0.1, CurrentValue = mopsHub.Hitbox_Extender.Hitbox_Transparency, Callback = function(Value) mopsHub.Hitbox_Extender.Hitbox_Transparency = Value end } },
+                --{ Function = "CreateToggle", Args = { Name = "Team Check", Flag = "_hitboxextender_teamcheck", CurrentValue = mopsHub.Hitbox_Extender.TeamCheck, Callback = function(Value) mopsHub.Hitbox_Extender.TeamCheck = Value end } },
+
+            }
+
+            UI.Functions.Character = {
+                { Function = "CreateSection", Args = "━ Modifications ━" },
+                { Function = "CreateSlider", Args = { Name = "Walkspeed Multiplier", Flag = "_character_modifications_walkspeed", Range = {1,10}, Increment = 1, CurrentValue = mopsHub.Character_Modifications.WalkSpeedMultiplier.Multiplier, Callback = function(Value) mopsHub.Character_Modifications.WalkSpeedMultiplier.Multiplier = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Infinite Jump", Flag = "_character_modifications_infinitejump", CurrentValue = mopsHub.Character_Modifications.InfiniteJump.Enabled, Callback = function(Value) mopsHub.Character_Modifications.InfiniteJump.Enabled = Value end } },
+                { Function = "CreateSlider", Args = { Name = "Infinite Jump Height", Flag = "_character_modifications_infinitejump_height", Range = {0,100}, Increment = 1, CurrentValue = mopsHub.Character_Modifications.InfiniteJump.JumpHeight, Callback = function(Value) mopsHub.Character_Modifications.InfiniteJump.JumpHeight = Value end } },
+                { Function = "CreateToggle", Args = { Name = "Bunny Hop", Flag = "_character_modifications_bunnyhop", CurrentValue = mopsHub.Character_Modifications.Bunny_Hop.Enabled, Callback = function(Value) mopsHub.Character_Modifications.Bunny_Hop.Enabled = Value end } },
+            }
+
+            UI.Functions.Misc = {
+                { Function = "CreateSection", Args = "━ Chat Spammer ━" },
+                { Function = "CreateToggle", Args = { Name = "Enabled", Flag = "_chatspam", CurrentValue = mopsHub.Chat_Spam.Enabled, Callback = function(Value) mopsHub.Chat_Spam.Enabled = Value end } },
+                { Function = "CreateInput", Args = { Name = "Message", Flag = "_chatspam_message", CurrentValue = mopsHub.Chat_Spam.Message, RemoveTextAfterFocusLost = false, PlaceholderText = "Message", Callback = function(Value) mopsHub.Chat_Spam.Message = Value end } },
+            }
+
+            UI.Functions.Settings = {
+                { Function = "CreateSection", Args = " ━ Script ━ " },
+                { Function = "CreateToggle", Args = { Name = "Auto Load Configs", Flag = "_autoLoadConfigs", CurrentValue = mopsHub.Settings.autoLoadConfigs, Callback = function(Value) mopsHub.Settings.autoLoadConfigs = Value; mopsHub.Functions.Other.saveLocalConfig(Value) end } },
+                { Function = "CreateParagraph", Args = { Title = "Script Informations", Content = string.format("\nScript Version: %s", ScriptVersion or ""), } },
+                { Function = "CreateParagraph", Args = { Title = "Client Informations", Content = string.format("\nExecutor: %s %s\n\nClient Id: %s", ExecutorName or "unknown", ExecutorVersion or "unknown", ClientId or "unknown"), } },
+            }
+
+            --UI Init (my ass automatic rayfield ui loader lol xd)
+            do
+                local success, err = pcall(function()
+                    for _, n in pairs(UI.Tabs) do
+                        local w = Window:CreateTab(n)
+                        getgenv()._WINDOW.Tabs[n] = w
+                    end
+                    for _, c in pairs(UI.Credits) do
+                        local _c = ""
+                        for _,v in pairs(c.Content) do
+                            if #v[2] > 0 then
+                                _c = _c.."\n"..v[1].." - ".. v[2]
+                            else
+                                _c = _c.."\n"..v[1]
+                            end
+                        end
+                        getgenv()._WINDOW.Tabs["Credits"]:CreateSection(string.format("━ %s ━", c.Name))
+                        getgenv()._WINDOW.Tabs["Credits"]:CreateParagraph({Title = c.Name, Content = _c})
+                    end
+
+                    for index, funcs in pairs(UI.Functions) do
+                        if mopsHub.Settings._DEBUG then
+                            rconsolewarn("[mopsHub UI Init]: Creating "..#funcs.." function(s) for ".. index.. "")
+                        end
+                        for i, func in pairs(funcs) do
+                            if func.Function and func.Args then
+                                local Tab = getgenv()._WINDOW.Tabs[index]
+                                if Tab then
+                                    pcall(function()
+                                        local f,_s = func.Function, true
+                                        if f == "CreateSection" then
+                                            Tab:CreateSection(func.Args)
+                                        elseif f == "CreateButton" then
+                                            Tab:CreateButton(func.Args)
+                                        elseif f == "CreateToggle" then
+                                            Tab:CreateToggle(func.Args)
+                                        elseif f == "CreateDropdown" then
+                                            Tab:CreateDropdown(func.Args)
+                                        elseif f == "CreateInput" then
+                                            Tab:CreateInput(func.Args)
+                                        elseif f == "CreateSlider" then
+                                            Tab:CreateSlider(func.Args)
+                                        elseif f == "CreateParagraph" then
+                                            Tab:CreateParagraph(func.Args)
+                                        elseif f == "CreateLabel" then
+                                            Tab:CreateLabel(func.Args)
+                                        elseif f == "CreateKeybind" then
+                                            Tab:CreateKeybind(func.Args)
+                                        elseif f == "CreateColorPicker" then
+                                            Tab:CreateColorPicker(func.Args)
+                                        else
+                                            _s = false
+                                        end;
+                                        if mopsHub.Settings._DEBUG then
+                                            if _s then
+                                                mopsHub.uiElements[tostring((func.Args.Flag) or func.Args:gsub('━','')) or "unknownElement"] = Element
+                                                rconsoleinfo("[mopsHub UI Init]: Created "..tostring((func.Args.Flag and "function element".. func.Args.Flag) or "section element ["..func.Args:gsub('━','').."]").. " for ".. index.. " ["..string.gsub(func.Function, "Create", "").. "]")
+                                            else
+                                                rconsoleerr("[mopsHub UI Init]: Invalid function [ "..tostring(func.Function).. " ] for [".. index .. "] index: ("..i..")")
+                                            end
+                                        end
+                                    end)
+                                end
+                            end
+                        end
+                    end
+                end)
+                if not success and err then
+                    rconsoleerr(string.format("[mopsHub UI Init - Error]: Unexpected error occurred while initalizin the UI."))
+                    rconsoleerr(string.format("Support: go find out"))
+                    rconsoleerr("Error: ".. err)
+                    Window:Destroy()
+                end
+            end
+
+            mopsHub.Functions = {
+                spawnTask = function(f) return task.spawn(f) end,
+                renderStepped = RunService.RenderStepped,
+
+                createFOVCircle = function() local circle = Drawing.new("Circle"); circle.Thickness = 2; circle.NumSides = 999; circle.Filled = false; circle.Transparency = 0.6; circle.Radius = mopsHub.Silent_Aim.fov; return circle end,
+                getSolidierId = function(_Player) for i, v in pairs(mopsHub.Client.globals.cli_names) do if _Player and _Player.Name == v then return i end end end,
+                getHealth = function(_Player) local id = mopsHub.Functions.getSolidierId(_Player) if not id then return 0 end local health = mopsHub.Client.globals.gbl_sol_healths[id] if not health then return 0 end return health end,
+                getTeam = function(_Player) local id = mopsHub.Functions.getSolidierId(_Player) if not id then return end return mopsHub.Client.globals.cli_teams[id] end,
+                isAlive = function(_Player) local id = mopsHub.Functions.getSolidierId(_Player) if not id then return false end if mopsHub.Client.globals.soldiers_alive[id] == true and mopsHub.Functions.getHealth(_Player) ~= 0 then return true end return false end,
+                getPlayerFromCharacter = function(_Character) for id, model in pairs(mopsHub.Client.globals.soldier_models) do if model == _Character then local name = mopsHub.Client.globals.cli_names[id] if name then return Players:FindFirstChild(name) end end end end,
+                getCharacter = function(_Player) local id = mopsHub.Functions.getSolidierId(_Player) if not id then return end return mopsHub.Client.globals.soldier_models[id] end,
+                getHumanoid = function() return mopsHub.Client.fpv_sol_instances.humanoid end,
+                getRootPart = function() return mopsHub.Client.fpv_sol_instances.root end,
+                isInCircle = function(point, center, radius) return (point.x - center.x*point.x - center.x) + (point.y - center.y*point.y - center.y) <= radius*radius end,
+                isVisible = function(Position, Ignore) local soldiers = {} for i,v in pairs(workspace:GetChildren()) do if v.Name == "soldier_model" then table.insert(soldiers, v) end end Ignore = Ignore or { Camera, workspace.Terrain, mopsHub.Functions.getCharacter(Player), workspace:FindFirstChild("workspace") and workspace.workspace:FindFirstChild("glass"), workspace.workspace:FindFirstChild("boundary"), unpack(soldiers) } return #Camera:GetPartsObscuringTarget({ Position }, Ignore) == 0 end,
+                getHitboxes = function() local hitboxes = {} for _,v in pairs(workspace:GetChildren()) do if v:IsA("BasePart") and v.Color == Color3.new(1,0,0) then table.insert(hitboxes, v) end end return hitboxes end,
+
+                toInteger = function(color)
+                    return math.floor(color.r*255)*256^2+math.floor(color.g*255)*256+math.floor(color.b*255)
+                end,
+                toHex = function(color)
+                    local int = mopsHub.Functions.toInteger(color)
+                    local current = int
+                    local final = ""
+                    local hexChar = {
+                        "A", "B", "C", "D", "E", "F"
+                    }
+                    repeat local remainder = current % 16
+                        local char = tostring(remainder)
+                        if remainder >= 10 then
+                            char = hexChar[1 + remainder - 10]
+                        end
+                        current = math.floor(current/16)
+                        final = final..char
+                    until current <= 0
+                    return "#"..string.reverse(final)
+                end,
+                Aim_Assist = {
+                    getTarget = function()
+                        local _target = nil
+                        local _position = nil
+                        local _min = math.huge
+
+                        local mouseLocation = UserInputService:GetMouseLocation()
+                        local _players = Players:GetPlayers()
+
+                        for _, plr in pairs(_players) do
+                            if plr == Player then continue end
+                            local _plr_team = mopsHub.Functions.getTeam(plr)
+                            local _client_team = mopsHub.Functions.getTeam(Player)
+                            if _plr_team == _client_team then continue end
+                            local _plr_character = mopsHub.Functions.getCharacter(plr)
+                            if not _plr_character then continue end
+                            local _h = mopsHub.Misc.Hitbox_Parts[mopsHub.Aim_Assist.Target_Hitbox]
+                            local _hitbox = _plr_character[_h]
+                            if not _hitbox then continue end
+                            local _health = mopsHub.Functions.getHealth(plr)
+                            if not (_health ~= 0) then continue end
+                            local screenPosition, visible = Camera:WorldToViewportPoint(_hitbox.Position)
+                            if mopsHub.Aim_Assist.Target_Hitbox == "Head" then screenPosition += Vector3.new(0,2,0) end
+                            if not visible then continue end
+                            --if not (mopsHub.Aim_Assist.VisibleCheck and not mopsHub.Functions.isVisible(_hitbox.Position)) then continue end
+                            local delta = (Vector2.new(screenPosition.X, screenPosition.Y) - mouseLocation).Magnitude
+                            if delta < _min and delta <= mopsHub.Aim_Assist.fov then
+                                _min = delta;
+                                _target = plr;
+                                _position = screenPosition;
+                            end
+                        end
+                        return _target, _position
+                    end
+                },
+                applyProxyMetatable = function(tbl, events)
+                    if getmetatable(tbl) then return end
+
+                    local cache = {}
+                    for key in next, events do
+                        cache[key] = tbl[key]
+                    end
+
+                    setmetatable(tbl, {
+                        __index = function(self, key)
+                            local fn = events[key]
+                            if fn and cache[key] then
+                                local result = fn(cache[key])
+                                if result then
+                                    return result
+                                end
+                                return cache[key]
+                            end
+                            return rawget(self, key)
+                        end,
+                        __newindex = function(self, key, value)
+                            if events[key] then
+                                cache[key] = value
+                                return
+                            end
+                            rawset(self, key, value)
+                        end
+                    })
+
+                    for key in next, events do
+                        rawset(tbl, key, nil)
+                    end
+                end,
+                Other = {
+                    saveLocalConfig = function(Value)
+                        mopsHub.Settings.autoLoadConfigs = Value
+                        local enc
+                        local s,e = pcall(function()
+                            enc = HttpService:JSONEncode(mopsHub.Settings)
+                        end)
+                        if s then
+                            writefile(ConfigFilePath, tostring(enc))
+                            if mopsHub.Settings._DEBUG then rconsoleinfo("[mopsHub Debug]: Updated settings json. > autoLoadConfigs: ".. tostring(Value)) end
+                        else
+                            writefile(ConfigFilePath, HttpService:JSONEncode(mopsHub.Settings))
+                            if mopsHub.Settings._DEBUG then rconsoleerr("[mopsHub Debug - Error]: Unable to encode settings json.\nError:\n\n> ".. e) end
+                        end
+                    end
+                },
+                hitPlayer = function(hitbox)
+                    assert(hitbox, "Missing <BasePart> hitbox")
+                    local hitbox_hash = mopsHub.Client.soldier_hitbox_hash[hitbox]
+                    local equipment = mopsHub.Client.fpv_sol_equipment.curr_equipment
+                    local client_hitbox_position = equipment.model.hitbox.Position
+
+                    if (mopsHub.Client.cli_state.id == mopsHub.Client.cli_state.fpv_sol_id) then
+                        mopsHub.Client.utils.net_msg_util.c_prep_net_msg(mopsHub.Client.globals.combat_net_msg_state, mopsHub.Client.enums.c_net_msg.MELEE_HIT_SOL, hitbox_hash);
+                    end
+                    mopsHub.Client.exe_set(mopsHub.Client.event_enum.FPV_SOL_MELEE_SOL_HIT, equipment, hitbox, client_hitbox_position)
+                end,
+                getIngoredParts = function()
+                    local ignore = {}
+                    for _,_player in pairs(Players:GetPlayers()) do
+                        local c = mopsHub.Functions.getCharacter(_player)
+                        if c then
+                            for _,i in pairs(c:GetChildren()) do table.insert(ignore, i) end
+                        end
+                    end
+                    for _,v in pairs(workspace:FindFirstChild("workspace"):GetChildren()) do
+                        if table.find({"boundary",""}, v.Name) then
+                            table.insert(ignore, v)
+                        end
+                    end
+                end
+            }
+
+            -- Setup
+            mopsHub.Functions.spawnTask(function()
+                pcall(function()
+                    if getgenv().mopsHub then
+                        for _,v in pairs(getgenv().mopsHub.Connections) do
+                            v:Disconnect()
+                        end
+                        for _,v in pairs(getgenv().mopsHub.Misc.FOV_Circles) do
+                            v:Remove()
+                        end
+                    end
+                end)
+
+                mopsHub.Client.globals = getrenv()._G.globals
+                mopsHub.Client.enums = getrenv()._G.enums
+                mopsHub.Client.utils = getrenv()._G.utils
+                --mopsHub.Client.event_enum = mopsHub.Client.utils.gbus.EVENT_ENUM
+                mopsHub.Client.global_sol_state = mopsHub.Client.globals.gbl_sol_state
+                mopsHub.Client.fpv_sol_recoil = mopsHub.Client.globals.fpv_sol_recoil
+                mopsHub.Client.fpv_sol_spread = mopsHub.Client.globals.fpv_sol_spread
+                mopsHub.Client.fpv_sol_equipment = mopsHub.Client.globals.fpv_sol_equipment
+                mopsHub.Client.fpv_sol_multipliers = mopsHub.Client.globals.fpv_sol_multipliers
+                mopsHub.Client.soldier_hitbox_hash = mopsHub.Client.globals.soldier_hitbox_hash
+                mopsHub.Client.soldier_hitbox_id_hash = mopsHub.Client.globals.soldier_hitbox_id_hash
+                mopsHub.Client.cli_state = mopsHub.Client.globals.cli_state
+                mopsHub.Client.soldier_models = mopsHub.Client.globals.soldier_models
+                mopsHub.Client.soldiers_alive = mopsHub.Client.globals.soldiers_alive
+                mopsHub.Client.sol_state_class = mopsHub.Client.enums.sol_state_class
+                mopsHub.Client.fpv_sol_instances = mopsHub.Client.globals.fpv_sol_instances
+                mopsHub.Client.fpv_sol_instances = mopsHub.Client.globals.fpv_sol_instances
+                mopsHub.Client.null_net_msg_state = mopsHub.Client.globals.null_net_msg_state
+                mopsHub.Client.sol_firearm_operation = getrenv()._G.sol_firearm_operation
+                mopsHub.Client.tpv_sol_joint_t = getrenv()._G.tpv_sol_joint_t
+                mopsHub.Client.exe_set = getrenv()._G.exe_set
+                mopsHub.Client.exe_set_t = getrenv()._G.exe_set_t
+
+                --Get EVENT_ENUM with gc since i have no clue where it is. maybe im retarded
+                for _,v in pairs(getgc(true)) do
+                    if typeof(v) == "table" and rawget(v, "FPV_SOL_EQUIP") then
+                        mopsHub.Client.event_enum = v
+                    end
+                end
+
+                mopsHub.Misc.FOV_Circles["SilentAim"] = mopsHub.Functions.createFOVCircle()
+                mopsHub.Misc.FOV_Circles["AimAssist"] = mopsHub.Functions.createFOVCircle()
+
+                --Auto Load Config
+                if isfile(ConfigFilePath) then
+                    local s,e = pcall(function()
+                        local file_settings = readfile(ConfigFilePath)
+                        local parsedSettings = {}
+                        local s,e = pcall(function()
+                            parsedSettings = HttpService:JSONDecode(file_settings)
+                        end)
+                        if s then
+                            for i,v in pairs(parsedSettings) do
+                                mopsHub.Settings[i] = v
+                            end
+                        else
+                            writefile(ConfigFilePath, HttpService:JSONEncode(mopsHub.Settings))
+                            if mopsHub.Settings._DEBUG then rconsoleerr("[mopsHub Debug - Error]: Unable to parse local settings json.\nError:\n\n> ".. e) end
+                        end
+                    end)
+                    if not s and e then
+                        printconsole(e,200,0,0)
+                    end
+                else
+                    mopsHub.Settings.autoLoadConfigs = false
+                    writefile(ConfigFilePath, tostring(HttpService:JSONEncode(mopsHub.Settings)))
+                    if mopsHub.Settings._DEBUG then print("[mopsHub - Debug]: created local config file.") end
+                end
+            end)
+
+            --Silent Aim Target Update
+            mopsHub.Connections["_silentAim_targetUpdate"] = mopsHub.Functions.renderStepped:Connect(function()
+                local center = workspace.CurrentCamera.ViewportSize / 2
+
+                local clientCharacter = mopsHub.Functions.getCharacter(Player)
+                local clientHealth = mopsHub.Functions.getHealth(Player)
+                local clientTeam = mopsHub.Functions.getTeam(Player)
+
+                if not clientCharacter then return end
+                if clientHealth <= 0 then return end
+
+                local Choices = {}
+                for _, plr in next, Players:GetPlayers() do
+                    if plr == Player then continue end
+
+                    local character = mopsHub.Functions.getCharacter(plr)
+                    local health = mopsHub.Functions.getHealth(plr)
+                    local team = mopsHub.Functions.getTeam(plr)
+                    local bone = character and character:FindFirstChild(mopsHub.Misc.Hitbox_Parts[mopsHub.Silent_Aim.Target_Hitbox])
+                    if health > 0 and character and team ~= clientTeam and bone then
+                        local pos, vis = workspace.CurrentCamera:WorldToViewportPoint(bone.Position)
+                        local p1, p2 = Vector2.new(Mouse.X, Mouse.Y), Vector2.new(pos.X, pos.Y)
+                        local screenPos = Vector2.new(pos.X, pos.Y)
+
+                        local magnitude = (p2 - p1).Magnitude
+                        if (magnitude < mopsHub.Silent_Aim.fov) and not (mopsHub.Silent_Aim.VisibleCheck and not mopsHub.Functions.isVisible(bone.Position) and not vis) then
+                            local distance = math.floor((screenPos - center).Magnitude)
+                            table.insert(Choices, {
+                                Player = plr,
+                                Distance = distance,
+                                Character = character,
+                            })
+                        end
+                    end
+                end
+
+                table.sort(Choices, function(a, b)
+                    return a.Distance < b.Distance
+                end)
+
+                local choice = Choices[1]
+                if choice then
+                    local plr = choice.Player;
+                    mopsHub.Misc.Silent_Aim_Target = plr
+                else
+                    mopsHub.Misc.Silent_Aim_Target = nil
+                end
+            end)
+
+            --Silent Aim
+            mopsHub.Functions.spawnTask(function()
+                local old_exe_set = nil
+
+                local function exe_set_proxy(event, ...)
+                    local args = { ... }
+                    if event == mopsHub.Client.exe_set_t.FPV_SOL_BULLET_SPAWN then
+                        local stack = debug.getstack(3)
+
+                        local discharge_params = nil
+                        for idx, obj in next, stack do
+                            if type(obj) == 'table' and type(rawget(obj, 'fire_params')) == 'table' then
+                                discharge_params = obj;
+                                break
+                            end
+                        end
+                        if mopsHub.Silent_Aim.Enabled and mopsHub.Misc.Silent_Aim_Target and discharge_params then
+                            local character = mopsHub.Functions.getCharacter(mopsHub.Misc.Silent_Aim_Target)
+                            local bone = character and character:FindFirstChild('HumanoidRootPart')
+
+                            if bone then
+                                local fire_params = discharge_params.fire_params
+                                local fire_multipliers = discharge_params.fire_multipliers
+                                local velocity = fire_params.muzzle_velocity * fire_multipliers.muzzle_velocity;
+
+                                args[4] = CFrame.lookAt(args[3], bone.CFrame.p).LookVector * (velocity * 1)
+                            end
+                        end
+                    end
+
+                    return old_exe_set(event, unpack(args))
+                end
+
+                old_exe_set = hookfunction(mopsHub.Client.exe_set, function(...)
+                    return exe_set_proxy(...)
+                end)
+            end)
+
+            --Aim Assist
+            mopsHub.Connections["_aimAssist_inputBegan"] = UserInputService.InputBegan:Connect(function(input, processed)
+                if input.UserInputType == Enum.UserInputType.MouseButton2 and mopsHub.Aim_Assist.Enabled then
+                    mopsHub.Misc.Aim_Assist_Active = true
+                end
+            end)
+
+            mopsHub.Connections["_aimAssist_inputended"] = UserInputService.InputEnded:Connect(function(input, processed)
+                if input.UserInputType == Enum.UserInputType.MouseButton2 and mopsHub.Aim_Assist.Enabled then
+                    mopsHub.Misc.Aim_Assist_Active = false
+                end
+            end)
+
+            mopsHub.Connections["_aimAssist_update"] = mopsHub.Functions.renderStepped:Connect(function()
+                if mopsHub.Aim_Assist.Enabled and mopsHub.Misc.Aim_Assist_Active then
+                    local target, screenPos = mopsHub.Functions.Aim_Assist.getTarget()
+                    if not target then return end
+                    local mouseLocation = UserInputService:GetMouseLocation()
+                    mousemoverel( (screenPos.X - mouseLocation.X) / mopsHub.Aim_Assist.Smoothness, (screenPos.Y - mouseLocation.Y) / mopsHub.Aim_Assist.Smoothness )
+                end
+            end)
+
+            --ESP
+            mopsHub.Functions.spawnTask(function()
+                if getgenv().esp then getgenv().esp:unload() end
+                local esp = {cache = {} };
+
+                function esp:unload()
+                    for i,v in next, esp.cache do
+                        getgenv().esp.remove_plr(i)
+                    end
+                    getgenv().esp_loop = nil
+                end
+                function esp.rotatev2(V2, r)
+                    local c = math.math.cos(r);
+                    local s = math.math.sin(r);
+                    return Vector2.new(c * V2.X - s * V2.Y, s * V2.X + c * V2.Y);
+                end;
+
+                function esp.getmagnitude(p1,p2)
+                    return (p1 - p2).Magnitude
+                end;
+
+                function esp.getprimarypart(model)
+                    local found_part = model ~= nil and model:FindFirstChild('HumanoidRootPart')
+                    return found_part
+                end;
+
+                function esp.inst(instance,prop)
+                    local INEW = Instance.new(instance)
+                    local s, e  = pcall(function()
+                        for i,v in next, prop do
+                            INEW[i] = v
+                        end
+                    end)
+                    return INEW
+                end;
+
+                function esp.draw(drawing,prop)
+                    local NEWDRAWING = Drawing.new(drawing)
+                    local s, e = pcall(function()
+                        for i,v in next, prop do
+                            NEWDRAWING[i] = v
+                        end
+                    end)
+                    return NEWDRAWING
+                end;
+
+                function esp.setall(array,prop,value)
+                    for i,v in next, array do
+                        if tostring(v) ~= 'Highlight' and tostring(i) ~= 'arrow' and tostring(i) ~= 'arrow_outline' then
+                            v[prop] = value
+                        end
+                    end
+                end;
+
+                function esp.remove_plr(character)
+                    if rawget(esp.cache,character) then
+                        for _,v in pairs(esp.cache[character]) do
+                            v:Remove()
+                        end;
+                        esp.cache[character] = nil;
+                    end;
+                end;
+
+                function esp.check(character)
+                    local can_pass = true
+                    if character:FindFirstChild("friendly_marker") then can_pass = false end
+                    if not character.Parent == workspace then can_pass = false end
+                    local plr = mopsHub.Functions.getPlayerFromCharacter(character)
+                    local plr_team = mopsHub.Functions.getTeam(plr)
+                    local client_team = mopsHub.Functions.getTeam(Player)
+                    if plr_team == client_team then can_pass = false end
+                    if plr then if not mopsHub.Functions.isAlive(plr) then can_pass = false end end
+                    if not (mopsHub.Functions.getHealth(plr) ~= 0) then can_pass = false end
+                    return can_pass
+                end;
+
+                function esp.add_plr(character)
+                    local plr_tab = {}
+                    plr_tab.inner_box = esp.draw('Square',{
+                        Filled = true,
+                    });
+                    plr_tab.tracer = esp.draw('Line',{
+                        Thickness = 1,
+                    });
+                    plr_tab.box_outline = esp.draw('Square',{
+                        Filled = false,
+                        Transparency = 1,
+                        Thickness = 3,
+                    });
+                    plr_tab.box = esp.draw('Square',{
+                        Filled = false,
+                        Transparency = 1,
+                        Thickness = 1,
+                    });
+                    plr_tab.name_bold = esp.draw('Text',{
+                        Center = true,
+                        Outline = false,
+                        Transparency = 1,
+                    });
+                    plr_tab.distance = esp.draw('Text',{
+                        Center = true,
+                    });
+                    plr_tab.highlight = esp.inst('Highlight',{
+                    });
+                    plr_tab.health = esp.draw('Text',{
+                        Center = false,
+                    });
+                    plr_tab.healthbar_outline = esp.draw('Line',{
+                        Thickness = 3,
+                    });
+                    plr_tab.healthbar = esp.draw('Line',{
+                        Thickness = 1,
+                    });
+                    plr_tab.name = esp.draw('Text',{
+                        Center = true,
+                    });
+                    plr_tab.highlight = esp.inst('Highlight',{
+                    });
+                    esp.cache[character] = plr_tab;
+                end
+
+                function esp.update_esp(character,array)
+                    local rootpart = character:FindFirstChild('HumanoidRootPart')
+                    local player = mopsHub.Functions.getPlayerFromCharacter(character)
+                    local screenpos, onscreen = Camera.WorldToViewportPoint(Camera, rootpart.Position)
+                    local health
+                    if player then
+                        health = mopsHub.Functions.getHealth(player)
+                    end
+                    local scale_factor = 1 / (screenpos.Z * math.tan(math.rad(Camera.FieldOfView * 0.5)) * 2) * 100
+                    local width, height = math.floor(45 * scale_factor), math.floor(65 * scale_factor)
+                    local size = Vector2.new(width,height)
+                    if size.X < 3 or size.Y < 6 then
+                        size = Vector2.new(5,10)
+                    end
+                    local position = Vector2.new(screenpos.X - size.X / 2,screenpos.Y - size.Y / 2)
+                    position = Vector2.new(math.floor(position.X),math.floor(position.Y))
+                    local bottom_bounds = 0
+                    local top_bounds = 0
+                    local bottom_offset = Vector2.new(math.floor(size.X / 2 + position.X), math.floor(size.Y + position.Y + 1))
+                    local top_offset = Vector2.new(math.floor(size.X / 2 + position.X), math.floor(position.Y - 16))
+                    local distance = esp.getmagnitude(rootpart.Position,Camera.CFrame.Position)
+                    local check = esp.check(character)
+                    local s, e = pcall(function()
+                        if onscreen and check then
+                            if mopsHub.ESP.Tracers then
+                                array.tracer.Visible = true
+                                array.tracer.From = Vector2.new(screenpos.X, screenpos.Y) + Vector2.new(0, size.Y / 2)
+                                array.tracer.To = Vector2.new(Camera.ViewportSize.X/2,Camera.ViewportSize.Y/mopsHub.ESP.TracerAttachShift or 1)
+                                array.tracer.Color = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.TracerColor
+                            else
+                                array.tracer.Visible = false
+                            end
+                            if mopsHub.ESP.Chams and health > 0 then
+                                array.highlight.Parent = CoreGui
+                                array.highlight.Adornee = character
+                                array.highlight.Enabled = true
+                                array.highlight.DepthMode = mopsHub.ESP.Chams_Visible_Check and Enum.HighlightDepthMode.Occluded or Enum.HighlightDepthMode.AlwaysOnTop
+                                array.highlight.FillTransparency = mopsHub.ESP.ChamsFillTransparency
+                                array.highlight.OutlineTransparency = mopsHub.ESP.ChamsOutlineTransparency
+                                if mopsHub.ESP.Highlight_Target and mopsHub.Functions.isVisible(rootpart.Position) then
+                                    array.highlight.FillColor = Color3.fromRGB(0,255,0)
+                                    array.highlight.OutlineColor = Color3.fromRGB(0,255,0)
+                                else
+                                    array.highlight.FillColor = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.ChamsFillColor
+                                    array.highlight.OutlineColor = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.ChamsOutlineColor
+                                end
+                            else
+                                array.highlight.Enabled = false
+                            end
+                            if mopsHub.ESP.Boxes then
+                                array.box.Visible = true
+                                array.box.Size = size
+                                array.box.Position = position
+                                array.box.Color = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.BoxColor
+                                array.box_outline.Size = size
+                                array.box_outline.Position = position
+                                array.box_outline.Visible = false
+                                array.box_outline.Color = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.BoxColor
+                                array.inner_box.Size = Vector2.new(array.box.Size.X-3,array.box.Size.Y-3)
+                                array.inner_box.Position = Vector2.new(position.X+1.5,position.Y+1.5)
+                                array.inner_box.Transparency = 0.5
+                                array.inner_box.Color = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.BoxColor
+                                array.inner_box.Visible = false
+                            else
+                                array.box.Visible = false
+                            end
+                            if mopsHub.ESP.HealthBar then
+                                array.healthbar.Transparency = 1
+                                array.healthbar_outline.Transparency = 1
+                                array.healthbar.Visible = true
+                                array.healthbar.Color = Color3.fromRGB(255,0,0):Lerp(Color3.fromRGB(0,255,0),health / 100);
+                                array.healthbar.From = Vector2.new((position.X - 5), position.Y + size.Y)
+                                array.healthbar.To = Vector2.new(array.healthbar.From.X, array.healthbar.From.Y - (health / 100) * size.Y)
+                                array.healthbar_outline.Visible = false
+                                array.healthbar_outline.Color = Color3.fromRGB(255,255,255)
+                                array.healthbar_outline.From = Vector2.new(array.healthbar.From.X, position.Y + size.Y + 1 )
+                                array.healthbar_outline.To = Vector2.new(array.healthbar.From.X, (array.healthbar.From.Y -1 * size.Y) - 1)
+                            else
+                                array.healthbar.Visible = false
+                                array.healthbar_outline.Visible = false
+                            end
+                            if mopsHub.ESP.Names then
+                                array.name.Transparency = 1
+                                array.name_bold.Transparency = 0.5
+                                array.name.Visible = true
+                                array.name.Text = tostring(player)
+                                array.name.Size = mopsHub.ESP.FontSize
+                                array.name.Font = 2
+                                --if esp.highlight_target.enabled and esp.highlight_target.target == tostring(character) then
+                                --    array.name.Color = esp.highlight_target.color
+                                --else
+                                    array.name.Color = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.TextColor
+                                --end
+                                array.name.Outline = false
+                                array.name.OutlineColor = Color3.fromRGB(255,255,255)
+                                array.name.Position = Vector2.new(top_offset.X,top_offset.Y - (top_bounds))
+                            else
+                                array.name.Visible = false
+                                array.name_bold.Visible = false
+                            end
+                            if mopsHub.ESP.Health then
+                                local From = Vector2.new((position.X - 5), position.Y + size.Y)
+                                local To = Vector2.new(From.X, From.Y - 1 * size.Y)
+                                array.health.Transparency = 1
+                                array.health.Visible = true
+                                array.health.Text = tostring(math.floor(health))
+                                array.health.Size = mopsHub.ESP.FontSize
+                                array.health.Font = 2
+                                array.health.Color = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.TextColor
+                                array.health.Outline = false
+                                array.health.OutlineColor = Color3.fromRGB(255,255,255)
+                                array.health.Position = Vector2.new(position.X - 30, To.Y)
+                            else
+                                array.health.Visible = false
+                            end
+                            if mopsHub.ESP.Distance then
+                                array.distance.Transparency = 1
+                                array.distance.Visible = true
+                                array.distance.Text = tostring(math.floor(distance))..'s'
+                                array.distance.Size = mopsHub.ESP.FontSize
+                                array.distance.Font = 2
+                                array.distance.Color = (mopsHub.ESP.Rainbow and Color3.fromHSV(tick() % 5 / 5, 1 + 0, 1)) or mopsHub.ESP.TextColor
+                                array.distance.Outline = false
+                                array.distance.OutlineColor = Color3.fromRGB(255,255,255)
+                                array.distance.Position = Vector2.new(bottom_offset.X, bottom_offset.Y + bottom_bounds)
+                                bottom_bounds += 14
+                            else
+                                array.distance.Visible = false
+                            end
+                        else
+                            esp.setall(array, 'Visible', false)
+                        end
+                    end)
+                    if not s and e then
+                        printconsole(e, 255, 0, 0)
+                        esp.setall(array, 'Visible', false)
+                        array.highlight.Enabled = false
+                    end
+                end
+
+                for i,v in next, workspace:GetChildren() do
+                    if v.Name == "soldier_model" and mopsHub.Functions.getPlayerFromCharacter(v) ~= Player then
+                        esp.add_plr(v)
+                    end
+                end
+                workspace.ChildAdded:Connect(function(v)
+                    if v.Name == "soldier_model" then
+                        esp.add_plr(v)
+                    end
+                end)
+                workspace.ChildRemoved:Connect(function(v)
+                    if v.Name == "soldier_model" then
+                        esp.remove_plr(v)
+                    end
+                end)
+                mopsHub.Connections["_espUpdate"] = RunService.RenderStepped:Connect(function()
+                    for player, drawings in next, esp.cache do
+                        if drawings and player then
+                            esp.update_esp(player, drawings);
+                        end
+                    end
+                end)
+                getgenv().esp = esp
+            end)
+
+            --Infinite Jump
+            mopsHub.Functions.spawnTask(function()
+                local function Action(Object, Function) if Object ~= nil then Function(Object); end end
+                game:GetService('UserInputService').InputBegan:Connect(function(UserInput)
+                    if UserInput.UserInputType == Enum.UserInputType.Keyboard and UserInput.KeyCode == Enum.KeyCode.Space then
+                        local Humanoid = mopsHub.Functions.getHumanoid()
+                        local RootPart = mopsHub.Functions.getRootPart()
+                        if not mopsHub.Character_Modifications.InfiniteJump.Enabled then return end
+                        if not Humanoid or not RootPart then return end
+                        Action(Humanoid, function(self)
+                            if self:GetState() == Enum.HumanoidStateType.Jumping or self:GetState() == Enum.HumanoidStateType.Freefall then
+                                Action(RootPart, function(Root)
+                                    Root.Velocity = Vector3.new(0, mopsHub.Character_Modifications.InfiniteJump.JumpHeight or 50, 0);
+                                end)
+                            end
+                        end)
+                    end
+                end)
+            end)
+
+            --Character Modifications
+            mopsHub.Connections["_characterModifications"] = mopsHub.Functions.renderStepped:Connect(function()
+                if mopsHub.Client.fpv_sol_multipliers then
+                    mopsHub.Client.fpv_sol_multipliers.movement = mopsHub.Character_Modifications.WalkSpeedMultiplier.Multiplier
+                end
+            end)
+
+            --Gun Mods
+            mopsHub.Functions.spawnTask(function()
+                local spread = mopsHub.Client.fpv_sol_spread.spread
+                local attitude_delta = mopsHub.Client.fpv_sol_recoil.attitude_delta
+
+                setmetatable(mopsHub.Client.fpv_sol_spread, {
+                    __index = function(self, key)
+                        if key == 'spread' then
+                            if mopsHub.Gun_Mods.NoSpread then return 0 end
+                            return spread
+                        end
+                        return rawget(self, key)
+                    end,
+                    __newindex = function(self, key, value)
+                        if key == 'spread' then spread = value; return end
+                        rawset(self, key, value)
+                    end
+                })
+                setmetatable(mopsHub.Client.fpv_sol_recoil, {
+                    __index = function(self, key)
+                        if key == 'attitude_delta' then
+                            if mopsHub.Gun_Mods.NoRecoil then return Vector3.new() end
+                            return attitude_delta
+                        end
+                        return rawget(self, key)
+                    end,
+                    __newindex = function(self, key, value)
+                        if key == 'attitude_delta' then attitude_delta = value; return end
+                        rawset(self, key, value)
+                    end
+                })
+
+                rawset(mopsHub.Client.fpv_sol_spread, 'spread', nil)
+                rawset(mopsHub.Client.fpv_sol_recoil, 'attitude_delta', nil)
+
+                if closureCheck and not iskrnlclosure then
+                    local OldEvalUdho = mopsHub.Client.utils.math_util.eval_udho
+                    local function eval_udho(...)
+                        if mopsHub.Gun_Mods.NoRecoil and debug.info(2, 's'):find('recoil_anim') then
+                            return 0, 0
+                        end
+                        return OldEvalUdho(...)
+                    end
+                    mopsHub.Client.utils.math_util.eval_udho = eval_udho
+
+                    for _, fn in next, getgc() do
+                        if type(fn) == 'function' then
+                            if islclosure(fn) and (not closureCheck(fn)) then
+                                local upvalues = getupvalues(fn)
+                                for _, upv in next, upvalues do
+                                    if upv == OldEvalUdho then
+                                        setupvalue(fn, _, eval_udho)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+
+            --FOV Update
+            mopsHub.Connections["_fovUpdate"] = mopsHub.Functions.renderStepped:Connect(function()
+                if mopsHub.Misc.FOV_Circles.SilentAim then
+                    mopsHub.Misc.FOV_Circles.SilentAim.Position = UserInputService:GetMouseLocation()
+                    mopsHub.Misc.FOV_Circles.SilentAim.Radius = mopsHub.Silent_Aim.fov
+                    mopsHub.Misc.FOV_Circles.SilentAim.Visible = mopsHub.Silent_Aim.showFOV and mopsHub.Silent_Aim.Enabled
+                    mopsHub.Misc.FOV_Circles.SilentAim.Color = mopsHub.Silent_Aim.fovColor
+                end
+                if mopsHub.Misc.FOV_Circles.AimAssist then
+                    mopsHub.Misc.FOV_Circles.AimAssist.Position = UserInputService:GetMouseLocation()
+                    mopsHub.Misc.FOV_Circles.AimAssist.Radius = mopsHub.Aim_Assist.fov
+                    mopsHub.Misc.FOV_Circles.AimAssist.Visible = mopsHub.Aim_Assist.showFOV and mopsHub.Aim_Assist.Enabled
+                    mopsHub.Misc.FOV_Circles.AimAssist.Color = mopsHub.Aim_Assist.fovColor
+                end
+            end)
+
+            --Hitbox Extender
+            mopsHub.Connections["_hitboxExtender"] = mopsHub.Functions.renderStepped:Connect(function()
+                if mopsHub.Hitbox_Extender.Enabled then
+                    for _,v in pairs(Players:GetPlayers()) do
+                        local client_team = mopsHub.Functions.getTeam(Player)
+                        local player_team = mopsHub.Functions.getTeam(v)
+                        local soldierId = mopsHub.Functions.getSolidierId(v)
+                        if client_team ~= player_team then
+                            for hitbox, id in pairs(mopsHub.Client.soldier_hitbox_hash) do
+                                if id == soldierId then
+                                    for joint,__id in pairs(mopsHub.Client.tpv_sol_joint_t) do
+                                        if mopsHub.Hitbox_Extender.Target_Hitbox == "All" then
+                                            pcall(function()
+                                                local _size = mopsHub.Hitbox_Extender.Size
+                                                hitbox.Size = Vector3.new(_size,_size,_size)
+                                                hitbox.Transparency = mopsHub.Hitbox_Extender.Hitbox_Transparency
+                                            end)
+                                        else
+                                            local joint_id = mopsHub.Misc.Hitbox_IDs[mopsHub.Hitbox_Extender.Target_Hitbox]
+                                            assert(joint_id, "Invalid <string> TargetHitbox")
+                                            if __id == joint_id and mopsHub.Client.soldier_hitbox_id_hash[hitbox] == joint_id then
+                                                pcall(function()
+                                                    local _size = mopsHub.Hitbox_Extender.Size
+                                                    hitbox.Size = Vector3.new(_size,_size,_size)
+                                                    hitbox.Transparency = mopsHub.Hitbox_Extender.Hitbox_Transparency
+                                                end)
+                                            else
+                                                if not (mopsHub.Client.soldier_hitbox_id_hash[hitbox] == joint_id) then
+                                                    hitbox.Transparency = 1
+                                                    hitbox.Size = mopsHub.Misc.Hitbox_Sizes[joint] or Vector3.new(1,1,1)
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                else
+                    for hitbox, id in pairs(mopsHub.Client.soldier_hitbox_hash) do
+                        for joint, __id in pairs(mopsHub.Client.tpv_sol_joint_t) do
+                            if mopsHub.Misc.Hitbox_Sizes[joint] then
+                                hitbox.Transparency = 1
+                                hitbox.Size = mopsHub.Misc.Hitbox_Sizes[joint]
+                            end
+                        end
+                    end
+                end
+            end)
+
+            --Bunny Hop
+            mopsHub.Connections["_bunnyHop"] = mopsHub.Functions.renderStepped:Connect(function()
+                if mopsHub.Character_Modifications.Bunny_Hop.Enabled and UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+                    local humanoid = mopsHub.Functions.getHumanoid()
+                    if humanoid then
+                        local power = 4
+                        power = power and (2 * game.Workspace.Gravity * power) ^ 0.5 or 40
+                        humanoid.Jump = true
+                        humanoid.JumpPower = power
+                    end
+                end
+            end)
+
+            --Kill Aura
+            mopsHub.Connections["_killAura"] = mopsHub.Functions.renderStepped:Connect(function()
+                if mopsHub.KillAura and mopsHub.Functions.isAlive(Player) then
+                    local client_rootPart = mopsHub.Functions.getRootPart()
+                    if client_rootPart then
+                        for _,v in pairs(CollectionService:GetTagged("ENEMY_SOLDIER")) do
+                            if (v.Position - client_rootPart.Position).Magnitude < 2 then
+                                task.spawn(mopsHub.Functions.hitPlayer, v)
+                            end
+                        end
+                    end
+                end
+            end)
+
+            --Chat Spammer
+            mopsHub.Connections["_chatSpammer"] = mopsHub.Functions.renderStepped:Connect(function()
+                if mopsHub.Chat_Spam.Enabled and mopsHub.Chat_Spam.Message ~= "" then
+                    local message = string.format("%s", mopsHub.Chat_Spam.Message)
+                    mopsHub.Client.utils.net_msg_util.c_prep_net_msg(mopsHub.Client.null_net_msg_state, mopsHub.Client.enums.c_net_msg.CHAT, message)
+                end
+            end)
+
+            --Finish
+            if mopsHub.Settings.autoLoadConfigs then
+                Rayfield:LoadConfiguration()
+                if mopsHub.uiElements["_autoLoadConfigs"] then
+                    mopsHub.uiElements["_autoLoadConfigs"]:Set(mopsHub.Settings.autoLoadConfigs)
+                end
+                if mopsHub.Settings._DEBUG then
+                    rconsoleinfo("[mØpsHub - Debug]: loaded config from previous session")
+                end
+            end
+
+            getgenv().mopsHub = mopsHub
+
+            printconsole(string.format("[mØpsHub]: Framwork loaded in %s second(s).", tick()-_startTick))
+            if (syn and not isactor()) then printconsole("state: manual actor bypass") else printconsole("state: frontlines actor lua state") end
+        ]])
+    end
+end
